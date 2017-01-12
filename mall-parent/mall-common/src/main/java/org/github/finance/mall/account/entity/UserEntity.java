@@ -2,6 +2,8 @@ package org.github.finance.mall.account.entity;
 
 import java.util.List;
 
+import org.github.finance.mall.bank.entity.BankAccountEntity;
+
 import lombok.Data;
 
 /**

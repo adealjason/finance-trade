@@ -16,4 +16,7 @@ public class UserLogInVO {
     @NotNull
     private String logInPassword;
 
+    @NotNull
+    private String verificationCode;
+
 }

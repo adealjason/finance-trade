@@ -24,5 +24,5 @@ public @interface NotNull {
     /**
      * @return
      */
-    String errorMessage() default "该属性不能为空";
+    String errorMessage() default "值不能为空";
 }
