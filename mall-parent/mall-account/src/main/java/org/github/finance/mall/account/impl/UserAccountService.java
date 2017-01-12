@@ -2,7 +2,7 @@ package org.github.finance.mall.account.impl;
 
 import javax.annotation.Resource;
 
-import org.github.finance.mall.account.IUserAccount;
+import org.github.finance.mall.account.IUserAccountService;
 import org.github.finance.mall.account.dao.dataobject.UserRegisterDO;
 import org.github.finance.mall.account.dao.helper.UserRegisterDOHelper;
 import org.github.finance.mall.account.exception.MallAccountException;
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
-public class UserAccount implements IUserAccount {
+public class UserAccountService implements IUserAccountService {
 
     @Resource
     private IUserRegister userRegister;
