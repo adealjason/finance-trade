@@ -7,22 +7,18 @@ import lombok.Data;
 /**
  * @author ligaofeng 2017年1月12日 下午7:47:00
  */
+@NotNull
 @Data
 public class BindCardVO {
 
-    @NotNull
     private String userId;
 
-    @NotNull
     private String cardNo;
 
-    @NotNull
     private String bankPhone;
 
-    @NotNull
     private String certNo;
 
-    @NotNull
     private String verificationCode;
 
 }

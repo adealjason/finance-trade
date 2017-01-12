@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * @author ligaofeng 2017年1月12日 下午5:23:46
  */
-@Target({ ElementType.FIELD })
+@Target({ ElementType.FIELD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
@@ -24,5 +24,5 @@ public @interface NotNull {
     /**
      * @return
      */
-    String errorMessage() default "值不能为空";
+    String errorMessage() default "the field can not be null";
 }

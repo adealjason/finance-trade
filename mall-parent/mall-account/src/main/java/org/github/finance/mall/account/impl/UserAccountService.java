@@ -6,8 +6,8 @@ import org.github.finance.mall.account.IUserAccountService;
 import org.github.finance.mall.account.dao.dataobject.UserDO;
 import org.github.finance.mall.account.dao.helper.UserRegisterDOHelper;
 import org.github.finance.mall.account.exception.MallAccountException;
-import org.github.finance.mall.account.service.IUserOnline;
-import org.github.finance.mall.account.service.IUserRegister;
+import org.github.finance.mall.account.service.IUserOnlineService;
+import org.github.finance.mall.account.service.IUserService;
 import org.github.finance.mall.account.vo.LogOutVO;
 import org.github.finance.mall.account.vo.UserLogInVO;
 import org.github.finance.mall.account.vo.UserRegisterVO;
@@ -23,28 +23,28 @@ import lombok.extern.slf4j.Slf4j;
 public class UserAccountService implements IUserAccountService {
 
     @Resource
-    private IUserRegister userRegister;
+    private IUserService       userService;
     @Resource
-    private IUserOnline   userOnline;
+    private IUserOnlineService userOnlineService;
 
     @Override
     public String register(UserRegisterVO userRegisterVO) throws MallAccountException {
         log.info("--->user {} register with loginName {} and userPhone {}", userRegisterVO.getUserName(),
                 userRegisterVO.getLogInName(), userRegisterVO.getUserPhone());
         UserDO userRegisterDO = UserRegisterDOHelper.toUserRegisterDO(userRegisterVO);
-        return userRegister.saveRegister(userRegisterDO);
+        return userService.saveRegister(userRegisterDO);
     }
 
     @Override
     public boolean logIn(UserLogInVO userLogIn) throws MallAccountException {
 
-        return userOnline.logIn(userLogIn.getLogInName(), userLogIn.getLogInPassword());
+        return userOnlineService.logIn(userLogIn.getLogInName(), userLogIn.getLogInPassword());
     }
 
     @Override
     public boolean logOut(LogOutVO logOut) throws MallAccountException {
 
-        return userOnline.logOut(logOut.getLogInName());
+        return userOnlineService.logOut(logOut.getLogInName());
     }
 
 }

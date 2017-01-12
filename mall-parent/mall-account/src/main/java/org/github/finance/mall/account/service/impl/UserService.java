@@ -2,7 +2,7 @@ package org.github.finance.mall.account.service.impl;
 
 import org.github.finance.mall.account.dao.dataobject.UserDO;
 import org.github.finance.mall.account.exception.MallAccountException;
-import org.github.finance.mall.account.service.IUserRegister;
+import org.github.finance.mall.account.service.IUserService;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
-public class UserRegister implements IUserRegister {
+public class UserService implements IUserService {
 
     @Override
     public String saveRegister(UserDO userDO) throws MallAccountException {

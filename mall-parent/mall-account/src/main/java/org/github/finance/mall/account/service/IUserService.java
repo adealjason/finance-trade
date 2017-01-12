@@ -6,7 +6,7 @@ import org.github.finance.mall.account.exception.MallAccountException;
 /**
  * @author ligaofeng 2017年1月12日 下午5:15:51
  */
-public interface IUserRegister {
+public interface IUserService {
 
     /**
      * 注册
