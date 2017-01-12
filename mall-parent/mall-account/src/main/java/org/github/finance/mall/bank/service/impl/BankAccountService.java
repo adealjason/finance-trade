@@ -30,7 +30,7 @@ public class BankAccountService implements IBankAccountService {
 
     @Override
     public void updateBankAccount(BankAccountDO bankAccountDO) throws MallBankException {
-
+        log.info("--->start to update bankAccountDO:{}", bankAccountDO);
     }
 
     /**

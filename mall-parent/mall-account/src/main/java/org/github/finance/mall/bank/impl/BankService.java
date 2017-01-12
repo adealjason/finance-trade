@@ -39,12 +39,25 @@ public class BankService implements IBankService {
 
     @Override
     public void unBindCard(UnBindCardVO unBindCardVO) throws MallBankException {
+        log.info("--->validate the verificationCode:{}", unBindCardVO.getVerificationCode());
 
+        log.info("--->cast to bankAccountDO by unBindCardVO:{}", unBindCardVO);
+        BankAccountDO bankAccountDO = BankAccountDOHelper.toBankAccountDO(unBindCardVO);
+
+        bankAccountService.updateBankAccount(bankAccountDO);
     }
 
     @Override
     public void changeBankPhone(ChangeBankPhoneVO changeBankPhoneVO) throws MallBankException {
 
+        log.info("--->validate the verificationCode:{}", changeBankPhoneVO.getVerificationCode());
+
+        log.info("--->validate the sourceBankPhone...");
+
+        log.info("--->cast to bankAccountDO by changeBankPhoneVO:{}", changeBankPhoneVO);
+        BankAccountDO bankAccountDO = BankAccountDOHelper.toBankAccountDO(changeBankPhoneVO);
+
+        bankAccountService.updateBankAccount(bankAccountDO);
     }
 
 }
