@@ -1,7 +1,12 @@
 package org.github.finance.mall.bank.impl;
 
+import javax.annotation.Resource;
+
 import org.github.finance.mall.bank.IBankService;
+import org.github.finance.mall.bank.dao.dataobject.BankAccountDO;
+import org.github.finance.mall.bank.dao.helper.BankAccountDOHelper;
 import org.github.finance.mall.bank.exception.MallBankException;
+import org.github.finance.mall.bank.service.IBankAccountService;
 import org.github.finance.mall.bank.vo.BindCardVO;
 import org.github.finance.mall.bank.vo.ChangeBankPhoneVO;
 import org.github.finance.mall.bank.vo.UnBindCardVO;
@@ -16,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class BankService implements IBankService {
 
+    @Resource
+    private IBankAccountService bankAccountService;
+
     @Override
     public void bindCard(BindCardVO bindCardVO) throws MallBankException {
         log.info("--->user {} will to bind card {}", bindCardVO.getUserId(), bindCardVO.getCardNo());
@@ -25,6 +33,8 @@ public class BankService implements IBankService {
         log.info("--->check the card through the bank...");
 
         log.info("--->bind card success,save the recored...");
+        BankAccountDO bankAccountDO = BankAccountDOHelper.toBankAccountDO(bindCardVO);
+        bankAccountService.saveBankAccount(bankAccountDO);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class UserService implements IUserService {
         String userId = UserIdGenerator.generateUserId();
         userDO.setId(userId);
 
-        log.info("--->start to register...");
+        log.info("--->start to save userDO:{}", userDO);
 
         return userId;
     }
