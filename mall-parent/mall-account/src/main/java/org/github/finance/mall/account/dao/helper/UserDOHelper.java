@@ -7,9 +7,9 @@ import org.joda.time.DateTime;
 /**
  * @author ligaofeng 2017年1月12日 下午5:46:44
  */
-public class UserRegisterDOHelper {
+public class UserDOHelper {
 
-    private UserRegisterDOHelper() {
+    private UserDOHelper() {
     }
 
     /**

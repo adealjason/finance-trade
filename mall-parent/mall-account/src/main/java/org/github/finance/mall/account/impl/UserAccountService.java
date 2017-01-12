@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.github.finance.mall.account.IUserAccountService;
 import org.github.finance.mall.account.dao.dataobject.UserDO;
-import org.github.finance.mall.account.dao.helper.UserRegisterDOHelper;
+import org.github.finance.mall.account.dao.helper.UserDOHelper;
 import org.github.finance.mall.account.exception.MallAccountException;
 import org.github.finance.mall.account.service.IUserOnlineService;
 import org.github.finance.mall.account.service.IUserService;
@@ -31,8 +31,8 @@ public class UserAccountService implements IUserAccountService {
     public String register(UserRegisterVO userRegisterVO) throws MallAccountException {
         log.info("--->user {} register with loginName {} and userPhone {}", userRegisterVO.getUserName(),
                 userRegisterVO.getLogInName(), userRegisterVO.getUserPhone());
-        UserDO userRegisterDO = UserRegisterDOHelper.toUserRegisterDO(userRegisterVO);
-        return userService.saveRegister(userRegisterDO);
+        UserDO userDO = UserDOHelper.toUserRegisterDO(userRegisterVO);
+        return userService.saveUser(userDO);
     }
 
     @Override

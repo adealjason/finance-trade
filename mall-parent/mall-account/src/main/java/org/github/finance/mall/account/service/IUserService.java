@@ -15,5 +15,5 @@ public interface IUserService {
      * @return
      * @throws MallAccountException
      */
-    public String saveRegister(UserDO userRegisterDO) throws MallAccountException;
+    public String saveUser(UserDO userRegisterDO) throws MallAccountException;
 }
