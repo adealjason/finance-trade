@@ -1,6 +1,6 @@
 package org.github.finance.mall.account.service.impl;
 
-import org.github.finance.mall.account.dao.dataobject.UserRegisterDO;
+import org.github.finance.mall.account.dao.dataobject.UserDO;
 import org.github.finance.mall.account.exception.MallAccountException;
 import org.github.finance.mall.account.service.IUserRegister;
 import org.springframework.stereotype.Service;
@@ -15,14 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 public class UserRegister implements IUserRegister {
 
     @Override
-    public String saveRegister(UserRegisterDO userRegisterDO) throws MallAccountException {
+    public String saveRegister(UserDO userDO) throws MallAccountException {
 
         log.info("--> check field is not null...");
 
         log.info("--->check user is not register before...");
 
         String userId = UserIdGenerator.generateUserId();
-        userRegisterDO.setUserId(userId);
+        userDO.setId(userId);
 
         log.info("--->start to register...");
 
@@ -36,6 +36,9 @@ public class UserRegister implements IUserRegister {
      */
     private static class UserIdGenerator {
 
+        /**
+         * @return
+         */
         public static String generateUserId() {
 
             return String.valueOf((int) ((Math.random() * 9 + 1) * 100000000));

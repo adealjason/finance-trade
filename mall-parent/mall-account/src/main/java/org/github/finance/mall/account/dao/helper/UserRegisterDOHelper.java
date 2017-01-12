@@ -1,6 +1,6 @@
 package org.github.finance.mall.account.dao.helper;
 
-import org.github.finance.mall.account.dao.dataobject.UserRegisterDO;
+import org.github.finance.mall.account.dao.dataobject.UserDO;
 import org.github.finance.mall.account.vo.UserRegisterVO;
 import org.joda.time.DateTime;
 
@@ -16,9 +16,9 @@ public class UserRegisterDOHelper {
      * @param userRegisterVO
      * @return
      */
-    public static UserRegisterDO toUserRegisterDO(UserRegisterVO userRegisterVO) {
+    public static UserDO toUserRegisterDO(UserRegisterVO userRegisterVO) {
         DateTime now = DateTime.now();
-        UserRegisterDO userRegisterDO = new UserRegisterDO();
+        UserDO userRegisterDO = new UserDO();
         userRegisterDO.setCreator("system");
         userRegisterDO.setModifier("system");
         userRegisterDO.setIsDeleted("N");

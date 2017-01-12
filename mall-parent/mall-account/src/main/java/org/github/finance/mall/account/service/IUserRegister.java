@@ -1,6 +1,6 @@
 package org.github.finance.mall.account.service;
 
-import org.github.finance.mall.account.dao.dataobject.UserRegisterDO;
+import org.github.finance.mall.account.dao.dataobject.UserDO;
 import org.github.finance.mall.account.exception.MallAccountException;
 
 /**
@@ -15,5 +15,5 @@ public interface IUserRegister {
      * @return
      * @throws MallAccountException
      */
-    public String saveRegister(UserRegisterDO userRegisterDO) throws MallAccountException;
+    public String saveRegister(UserDO userRegisterDO) throws MallAccountException;
 }

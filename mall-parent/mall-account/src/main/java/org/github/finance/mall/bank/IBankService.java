@@ -27,6 +27,8 @@ public interface IBankService {
     public void unBindCard(UnBindCardVO unBindCardVO) throws MallBankException;
 
     /**
+     * 更改银行预留手机号码
+     * 
      * @param changeBankPhoneVO
      * @throws MallBankException
      */
