@@ -17,7 +17,7 @@ public class ApplyPaymentDTO {
 
     private String         userId;
 
-    private String         orderId;
+    private String         paymentId;
 
     private String         productOfferingCode;
 

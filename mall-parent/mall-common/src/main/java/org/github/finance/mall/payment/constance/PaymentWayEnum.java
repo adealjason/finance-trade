@@ -7,13 +7,13 @@ import lombok.Getter;
  */
 public enum PaymentWayEnum {
 
-    CHINA_PAY("chinaPayment"),
+    CHINA_PAY("chinaPaymentWay"),
 
-    WEIXIN("weiXinPayment"),
+    WEIXIN("weiXinPaymentWay"),
 
-    ZHIFUBAO("zhifubaoPayment"),
+    ZHIFUBAO("zhifubaoPaymentWay"),
 
-    DIANZI_ZHANGHU("dzzhhPayment");
+    DIANZI_ZHANGHU("dzzhhPaymentWay");
 
     @Getter
     private String beanId;
