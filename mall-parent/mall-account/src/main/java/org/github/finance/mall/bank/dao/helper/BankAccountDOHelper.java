@@ -1,5 +1,6 @@
 package org.github.finance.mall.bank.dao.helper;
 
+import org.github.finance.mall.bank.constance.BindCardStatusEnum;
 import org.github.finance.mall.bank.dao.dataobject.BankAccountDO;
 import org.github.finance.mall.bank.dto.BindCardDTO;
 import org.github.finance.mall.bank.dto.ChangeBankPhoneDTO;
@@ -30,7 +31,7 @@ public class BankAccountDOHelper {
         bankAccountDO.setBankPhone(bindCardDTO.getBankPhone());
         bankAccountDO.setCardNo(bindCardDTO.getCardNo());
         bankAccountDO.setCertNo(bindCardDTO.getCertNo());
-        bankAccountDO.setStatus("BIND");
+        bankAccountDO.setStatus(BindCardStatusEnum.BIND.name());
         bankAccountDO.setUserId(bindCardDTO.getUserId());
         return bankAccountDO;
     }
@@ -43,7 +44,7 @@ public class BankAccountDOHelper {
         BankAccountDO bankAccountDO = new BankAccountDO();
         bankAccountDO.setUserId(unbindCardDTO.getUserId());
         bankAccountDO.setId(unbindCardDTO.getBankAccountId());
-        bankAccountDO.setStatus("UNBIND");
+        bankAccountDO.setStatus(BindCardStatusEnum.UNBIND.name());
         return bankAccountDO;
     }
 
