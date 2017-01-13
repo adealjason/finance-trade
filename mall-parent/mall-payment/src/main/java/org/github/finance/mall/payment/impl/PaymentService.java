@@ -8,6 +8,8 @@ import org.github.finance.mall.payment.dao.helper.PaymentRequestDOHelper;
 import org.github.finance.mall.payment.dto.ApplyPaymentDTO;
 import org.github.finance.mall.payment.dto.CreatePaymentDTO;
 import org.github.finance.mall.payment.exception.MallPaymentException;
+import org.github.finance.mall.payment.inner.IPaymentHandler;
+import org.github.finance.mall.payment.inner.impl.PaymentHandler.PaymentWay;
 import org.github.finance.mall.payment.service.IPaymentRequestService;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class PaymentService implements IPaymentService {
 
     @Resource
     private IPaymentRequestService paymentRequestService;
+    @Resource
+    private IPaymentHandler        paymentHandler;
 
     @Override
     public String createPayment(CreatePaymentDTO createPaymentDTO) throws MallPaymentException {
@@ -34,8 +38,10 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public void applyPayment(ApplyPaymentDTO applyPaymentDTO) throws MallPaymentException {
+    public PaymentWay.PaymentResult applyPayment(ApplyPaymentDTO applyPaymentDTO) throws MallPaymentException {
+        log.info("--->user {} apply payment:{}", applyPaymentDTO.getUserId(), applyPaymentDTO);
 
+        return paymentHandler.applyPayment(applyPaymentDTO);
     }
 
 }

@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author ligaofeng 2017年1月13日 下午1:14:38
+ * @author ligaofeng 2017年1月13日 下午3:41:30
  */
 @Slf4j
-@Service("chinaPaymentWay")
-public class ChinaPaymentWay implements PaymentWay {
+@Service("dzzhhPaymentWay")
+public class DzzhhPaymentWay implements PaymentWay {
 
     @Override
     public PaymentResult applyPayment(ApplyPaymentRequest applyPaymentRequest) throws MallPaymentException {
-        log.info("--->execute payment through china pay:{}", applyPaymentRequest);
+        log.info("--->execute payment through dzzhh pay:{}", applyPaymentRequest);
         PaymentResult paymentResult = new PaymentResult();
         paymentResult.setResult(true);
         log.info("--->return payment result...");
