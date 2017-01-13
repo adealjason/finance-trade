@@ -1,9 +1,9 @@
 package org.github.finance.mall.account;
 
+import org.github.finance.mall.account.dto.LogOutDTO;
+import org.github.finance.mall.account.dto.UserLogInDTO;
+import org.github.finance.mall.account.dto.UserRegisterDTO;
 import org.github.finance.mall.account.exception.MallAccountException;
-import org.github.finance.mall.account.vo.LogOutVO;
-import org.github.finance.mall.account.vo.UserLogInVO;
-import org.github.finance.mall.account.vo.UserRegisterVO;
 
 /**
  * 用户注册
@@ -15,20 +15,20 @@ public interface IUserAccountService {
     /**
      * 用户注册
      * 
-     * @param userRegisterVO
+     * @param userRegisterDTO
      * @return
      * @throws MallAccountException
      */
-    public String register(UserRegisterVO userRegisterVO) throws MallAccountException;
+    public String register(UserRegisterDTO userRegisterDTO) throws MallAccountException;
 
     /**
      * 登录
      * 
-     * @param userLogInVO
+     * @param userLogInDTO
      * @return
      * @throws MallAccountException
      */
-    public boolean logIn(UserLogInVO userLogInVO) throws MallAccountException;
+    public boolean logIn(UserLogInDTO userLogInDTO) throws MallAccountException;
 
     /**
      * 退出
@@ -37,6 +37,6 @@ public interface IUserAccountService {
      * @return
      * @throws MallAccountException
      */
-    public boolean logOut(LogOutVO logOut) throws MallAccountException;
+    public boolean logOut(LogOutDTO logOut) throws MallAccountException;
 
 }

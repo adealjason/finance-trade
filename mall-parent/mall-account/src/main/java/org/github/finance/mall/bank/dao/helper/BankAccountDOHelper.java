@@ -1,9 +1,9 @@
 package org.github.finance.mall.bank.dao.helper;
 
 import org.github.finance.mall.bank.dao.dataobject.BankAccountDO;
-import org.github.finance.mall.bank.vo.BindCardVO;
-import org.github.finance.mall.bank.vo.ChangeBankPhoneVO;
-import org.github.finance.mall.bank.vo.UnBindCardVO;
+import org.github.finance.mall.bank.dto.BindCardDTO;
+import org.github.finance.mall.bank.dto.ChangeBankPhoneDTO;
+import org.github.finance.mall.bank.dto.UnBindCardDTO;
 import org.joda.time.DateTime;
 
 /**
@@ -15,10 +15,10 @@ public class BankAccountDOHelper {
     }
 
     /**
-     * @param bindCardVO
+     * @param bindCardDTO
      * @return
      */
-    public static BankAccountDO toBankAccountDO(BindCardVO bindCardVO) {
+    public static BankAccountDO toBankAccountDO(BindCardDTO bindCardDTO) {
         DateTime now = DateTime.now();
 
         BankAccountDO bankAccountDO = new BankAccountDO();
@@ -27,31 +27,35 @@ public class BankAccountDOHelper {
         bankAccountDO.setIsDeleted("N");
         bankAccountDO.setGmtCreated(now.toDate());
         bankAccountDO.setGmtModified(now.toDate());
-        bankAccountDO.setBankPhone(bindCardVO.getBankPhone());
-        bankAccountDO.setCardNo(bindCardVO.getCardNo());
-        bankAccountDO.setCertNo(bindCardVO.getCertNo());
+        bankAccountDO.setBankPhone(bindCardDTO.getBankPhone());
+        bankAccountDO.setCardNo(bindCardDTO.getCardNo());
+        bankAccountDO.setCertNo(bindCardDTO.getCertNo());
         bankAccountDO.setStatus("BIND");
-        bankAccountDO.setUserId(bindCardVO.getUserId());
+        bankAccountDO.setUserId(bindCardDTO.getUserId());
         return bankAccountDO;
     }
 
     /**
-     * @param unBindCardVO
+     * @param unbindCardDTO
      * @return
      */
-    public static BankAccountDO toBankAccountDO(UnBindCardVO unBindCardVO) {
+    public static BankAccountDO toBankAccountDO(UnBindCardDTO unbindCardDTO) {
         BankAccountDO bankAccountDO = new BankAccountDO();
-        bankAccountDO.setUserId(unBindCardVO.getUserId());
-        bankAccountDO.setId(unBindCardVO.getBankAccountId());
+        bankAccountDO.setUserId(unbindCardDTO.getUserId());
+        bankAccountDO.setId(unbindCardDTO.getBankAccountId());
         bankAccountDO.setStatus("UNBIND");
         return bankAccountDO;
     }
 
-    public static BankAccountDO toBankAccountDO(ChangeBankPhoneVO changeBankPhoneVO) {
+    /**
+     * @param changeBankPhoneDTO
+     * @return
+     */
+    public static BankAccountDO toBankAccountDO(ChangeBankPhoneDTO changeBankPhoneDTO) {
         BankAccountDO bankAccountDO = new BankAccountDO();
-        bankAccountDO.setUserId(changeBankPhoneVO.getUserId());
-        bankAccountDO.setId(changeBankPhoneVO.getBankAccountId());
-        bankAccountDO.setBankPhone(changeBankPhoneVO.getDestBankPhone());
+        bankAccountDO.setUserId(changeBankPhoneDTO.getUserId());
+        bankAccountDO.setId(changeBankPhoneDTO.getBankAccountId());
+        bankAccountDO.setBankPhone(changeBankPhoneDTO.getDestBankPhone());
         return bankAccountDO;
     }
 }

@@ -1,9 +1,9 @@
 package org.github.finance.mall.bank;
 
+import org.github.finance.mall.bank.dto.BindCardDTO;
+import org.github.finance.mall.bank.dto.ChangeBankPhoneDTO;
+import org.github.finance.mall.bank.dto.UnBindCardDTO;
 import org.github.finance.mall.bank.exception.MallBankException;
-import org.github.finance.mall.bank.vo.BindCardVO;
-import org.github.finance.mall.bank.vo.ChangeBankPhoneVO;
-import org.github.finance.mall.bank.vo.UnBindCardVO;
 
 /**
  * @author ligaofeng 2017年1月12日 下午7:35:47
@@ -13,24 +13,24 @@ public interface IBankService {
     /**
      * 绑卡
      * 
-     * @param bindCardVO
+     * @param bindCardDTO
      * @throws MallBankException
      */
-    public void bindCard(BindCardVO bindCardVO) throws MallBankException;
+    public void bindCard(BindCardDTO bindCardDTO) throws MallBankException;
 
     /**
      * 解绑
      * 
-     * @param unBindCardVO
+     * @param unBindCardDTO
      * @throws MallBankException
      */
-    public void unBindCard(UnBindCardVO unBindCardVO) throws MallBankException;
+    public void unBindCard(UnBindCardDTO unBindCardDTO) throws MallBankException;
 
     /**
      * 更改银行预留手机号码
      * 
-     * @param changeBankPhoneVO
+     * @param changeBankPhoneDTO
      * @throws MallBankException
      */
-    public void changeBankPhone(ChangeBankPhoneVO changeBankPhoneVO) throws MallBankException;
+    public void changeBankPhone(ChangeBankPhoneDTO changeBankPhoneDTO) throws MallBankException;
 }

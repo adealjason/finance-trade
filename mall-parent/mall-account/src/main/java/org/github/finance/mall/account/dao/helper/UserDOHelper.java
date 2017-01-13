@@ -1,7 +1,7 @@
 package org.github.finance.mall.account.dao.helper;
 
 import org.github.finance.mall.account.dao.dataobject.UserDO;
-import org.github.finance.mall.account.vo.UserRegisterVO;
+import org.github.finance.mall.account.dto.UserRegisterDTO;
 import org.joda.time.DateTime;
 
 /**
@@ -13,10 +13,10 @@ public class UserDOHelper {
     }
 
     /**
-     * @param userRegisterVO
+     * @param userRegisterDTO
      * @return
      */
-    public static UserDO toUserRegisterDO(UserRegisterVO userRegisterVO) {
+    public static UserDO toUserRegisterDO(UserRegisterDTO userRegisterDTO) {
         DateTime now = DateTime.now();
         UserDO userDO = new UserDO();
         userDO.setCreator("system");
@@ -24,10 +24,10 @@ public class UserDOHelper {
         userDO.setIsDeleted("N");
         userDO.setGmtCreated(now.toDate());
         userDO.setGmtModified(now.toDate());
-        userDO.setLogInName(userRegisterVO.getLogInName());
-        userDO.setLogInPassword(userRegisterVO.getLogInPassword());
-        userDO.setUserName(userRegisterVO.getUserName());
-        userDO.setUserPhone(userRegisterVO.getUserPhone());
+        userDO.setLogInName(userRegisterDTO.getLogInName());
+        userDO.setLogInPassword(userRegisterDTO.getLogInPassword());
+        userDO.setUserName(userRegisterDTO.getUserName());
+        userDO.setUserPhone(userRegisterDTO.getUserPhone());
         return userDO;
     }
 

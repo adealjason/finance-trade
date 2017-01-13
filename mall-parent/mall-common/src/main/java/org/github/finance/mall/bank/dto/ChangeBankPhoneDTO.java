@@ -1,4 +1,4 @@
-package org.github.finance.mall.bank.vo;
+package org.github.finance.mall.bank.dto;
 
 import org.github.finance.mall.NotNull;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @NotNull
 @Data
-public class ChangeBankPhoneVO {
+public class ChangeBankPhoneDTO {
 
     private String userId;
 
