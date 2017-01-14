@@ -3,14 +3,14 @@ package org.github.finance.mall.account.impl;
 import javax.annotation.Resource;
 
 import org.github.finance.mall.account.IUserAccountService;
-import org.github.finance.mall.account.dao.dataobject.UserDO;
-import org.github.finance.mall.account.dao.helper.UserDOHelper;
-import org.github.finance.mall.account.dto.LogOutDTO;
-import org.github.finance.mall.account.dto.UserLogInDTO;
-import org.github.finance.mall.account.dto.UserRegisterDTO;
+import org.github.finance.mall.account.domain.AccountPassportDomain;
+import org.github.finance.mall.account.domain.helper.AccountPassportDomainHelper;
 import org.github.finance.mall.account.exception.MallAccountException;
 import org.github.finance.mall.account.service.IUserOnlineService;
 import org.github.finance.mall.account.service.IUserService;
+import org.github.finance.mall.share.account.dto.LogOutDTO;
+import org.github.finance.mall.share.account.dto.UserLogInDTO;
+import org.github.finance.mall.share.account.dto.UserRegisterDTO;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +31,9 @@ public class UserAccountService implements IUserAccountService {
     public String register(UserRegisterDTO userRegisterDTO) throws MallAccountException {
         log.info("--->user {} register with loginName {} and userPhone {}", userRegisterDTO.getUserName(),
                 userRegisterDTO.getLogInName(), userRegisterDTO.getUserPhone());
-        UserDO userDO = UserDOHelper.toUserRegisterDO(userRegisterDTO);
-        return userService.saveUser(userDO);
+        AccountPassportDomain accountPassportDomain = AccountPassportDomainHelper
+                .toAccountPassportDomain(userRegisterDTO);
+        return userService.saveUser(accountPassportDomain);
     }
 
     @Override

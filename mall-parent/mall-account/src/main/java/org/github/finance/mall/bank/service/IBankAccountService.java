@@ -1,6 +1,6 @@
 package org.github.finance.mall.bank.service;
 
-import org.github.finance.mall.bank.dao.dataobject.BankAccountDO;
+import org.github.finance.mall.bank.domain.BankAccountDomain;
 import org.github.finance.mall.bank.exception.MallBankException;
 
 /**
@@ -9,15 +9,15 @@ import org.github.finance.mall.bank.exception.MallBankException;
 public interface IBankAccountService {
 
     /**
-     * @param bankAccountDO
+     * @param bankAccountDomain
      * @throws MallBankException
      */
-    public void saveBankAccount(BankAccountDO bankAccountDO) throws MallBankException;
+    public void saveBankAccount(BankAccountDomain bankAccountDomain) throws MallBankException;
 
     /**
-     * @param bankAccountDO
+     * @param bankAccountDomain
      * @throws MallBankException
      */
-    public void updateBankAccount(BankAccountDO bankAccountDO) throws MallBankException;
+    public void updateBankAccount(BankAccountDomain bankAccountDomain) throws MallBankException;
 
 }

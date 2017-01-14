@@ -1,9 +1,9 @@
 package org.github.finance.mall.account;
 
-import org.github.finance.mall.account.dto.LogOutDTO;
-import org.github.finance.mall.account.dto.UserLogInDTO;
-import org.github.finance.mall.account.dto.UserRegisterDTO;
 import org.github.finance.mall.account.exception.MallAccountException;
+import org.github.finance.mall.share.account.dto.LogOutDTO;
+import org.github.finance.mall.share.account.dto.UserLogInDTO;
+import org.github.finance.mall.share.account.dto.UserRegisterDTO;
 
 /**
  * 用户注册

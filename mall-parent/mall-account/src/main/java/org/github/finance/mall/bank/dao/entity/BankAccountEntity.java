@@ -1,8 +1,8 @@
-package org.github.finance.mall.bank.dao.dataobject;
+package org.github.finance.mall.bank.dao.entity;
 
 import java.util.Date;
 
-import org.github.finance.mall.NotNull;
+import org.github.finance.mall.share.NotNull;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @NotNull
 @Data
-public class BankAccountDO {
+public class BankAccountEntity {
 
     private String id;
 

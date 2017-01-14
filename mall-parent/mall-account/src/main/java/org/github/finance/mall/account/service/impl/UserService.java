@@ -1,6 +1,8 @@
 package org.github.finance.mall.account.service.impl;
 
-import org.github.finance.mall.account.dao.dataobject.UserDO;
+import org.github.finance.mall.account.dao.entity.UserEntity;
+import org.github.finance.mall.account.dao.helper.UserEntityHelper;
+import org.github.finance.mall.account.domain.AccountPassportDomain;
 import org.github.finance.mall.account.exception.MallAccountException;
 import org.github.finance.mall.account.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -15,16 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService implements IUserService {
 
     @Override
-    public String saveUser(UserDO userDO) throws MallAccountException {
-
+    public String saveUser(AccountPassportDomain accountPassportDomain) throws MallAccountException {
         log.info("--> check field is not null...");
 
         log.info("--->check user is not register before...");
 
+        UserEntity userEntity = UserEntityHelper.toUserRegisterEntity(accountPassportDomain);
         String userId = UserIdGenerator.generateUserId();
-        userDO.setId(userId);
+        userEntity.setId(userId);
 
-        log.info("--->start to save userDO:{}", userDO);
+        log.info("--->start to save userEntity:{}", userEntity);
 
         return userId;
     }

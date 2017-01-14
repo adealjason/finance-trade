@@ -1,6 +1,6 @@
 package org.github.finance.mall.account.service;
 
-import org.github.finance.mall.account.dao.dataobject.UserDO;
+import org.github.finance.mall.account.domain.AccountPassportDomain;
 import org.github.finance.mall.account.exception.MallAccountException;
 
 /**
@@ -15,5 +15,5 @@ public interface IUserService {
      * @return
      * @throws MallAccountException
      */
-    public String saveUser(UserDO userRegisterDO) throws MallAccountException;
+    public String saveUser(AccountPassportDomain userRegisterDO) throws MallAccountException;
 }

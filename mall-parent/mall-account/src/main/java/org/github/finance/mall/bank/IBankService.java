@@ -1,9 +1,9 @@
 package org.github.finance.mall.bank;
 
-import org.github.finance.mall.bank.dto.BindCardDTO;
-import org.github.finance.mall.bank.dto.ChangeBankPhoneDTO;
-import org.github.finance.mall.bank.dto.UnBindCardDTO;
 import org.github.finance.mall.bank.exception.MallBankException;
+import org.github.finance.mall.share.bank.dto.BindCardDTO;
+import org.github.finance.mall.share.bank.dto.ChangeBankPhoneDTO;
+import org.github.finance.mall.share.bank.dto.UnBindCardDTO;
 
 /**
  * @author ligaofeng 2017年1月12日 下午7:35:47

@@ -1,8 +1,8 @@
-package org.github.finance.mall.account.dao.dataobject;
+package org.github.finance.mall.account.dao.entity;
 
 import java.util.Date;
 
-import org.github.finance.mall.NotNull;
+import org.github.finance.mall.share.NotNull;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import lombok.Data;
  * @author ligaofeng 2017年1月12日 下午5:19:01
  */
 @Data
-public class UserDO {
+public class UserEntity {
 
     @NotNull
     private String id;
