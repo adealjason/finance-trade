@@ -47,6 +47,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.github.finance.mall</groupId>
+				<artifactId>mall-share</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<!-- common 开发辅助 -->
 			<dependency>
 				<groupId>org.projectlombok</groupId>
