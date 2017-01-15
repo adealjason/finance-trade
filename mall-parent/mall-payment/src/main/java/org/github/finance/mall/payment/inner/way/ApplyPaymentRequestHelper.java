@@ -1,6 +1,6 @@
 package org.github.finance.mall.payment.inner.way;
 
-import org.github.finance.mall.payment.dto.ApplyPaymentDTO;
+import org.github.finance.mall.payment.domain.PaymentDomain;
 import org.github.finance.mall.payment.inner.impl.PaymentHandler.PaymentWay.ApplyPaymentRequest;
 
 /**
@@ -12,17 +12,17 @@ public class ApplyPaymentRequestHelper {
     }
 
     /**
-     * @param applyPaymentDTO
+     * @param paymentDomain
      * @return
      */
-    public static ApplyPaymentRequest toApplyPaymentRequest(ApplyPaymentDTO applyPaymentDTO) {
+    public static ApplyPaymentRequest toApplyPaymentRequest(PaymentDomain paymentDomain) {
         ApplyPaymentRequest applyPaymentRequest = new ApplyPaymentRequest();
-        applyPaymentRequest.setApplyPaymentTime(applyPaymentDTO.getApplyPaymentTime());
-        applyPaymentRequest.setPaymentId(applyPaymentDTO.getPaymentId());
-        applyPaymentRequest.setPaymentAmount(applyPaymentDTO.getPaymentAmount());
-        applyPaymentRequest.setPaymentWay(applyPaymentDTO.getPaymentWay());
-        applyPaymentRequest.setProductOfferingCode(applyPaymentDTO.getProductOfferingCode());
-        applyPaymentRequest.setUserId(applyPaymentDTO.getUserId());
+        applyPaymentRequest.setApplyPaymentTime(paymentDomain.getApplyPaymentTime());
+        applyPaymentRequest.setPaymentId(paymentDomain.getPaymentRequestId());
+        applyPaymentRequest.setPaymentAmount(paymentDomain.getPaymentAmount());
+        applyPaymentRequest.setPaymentWay(paymentDomain.getPaymentWay());
+        applyPaymentRequest.setProductOfferingCode(paymentDomain.getProductOfferingCode());
+        applyPaymentRequest.setUserId(paymentDomain.getUserId());
         return applyPaymentRequest;
     }
 }

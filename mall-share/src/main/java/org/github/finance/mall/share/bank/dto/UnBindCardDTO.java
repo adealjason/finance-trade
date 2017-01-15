@@ -1,5 +1,7 @@
 package org.github.finance.mall.share.bank.dto;
 
+import java.io.Serializable;
+
 import org.github.finance.mall.share.NotNull;
 
 import lombok.Data;
@@ -9,10 +11,12 @@ import lombok.Data;
  */
 @NotNull
 @Data
-public class UnBindCardDTO {
+public class UnBindCardDTO implements Serializable {
 
-    private String userId;
+    private static final long serialVersionUID = 3349102336938179899L;
 
-    private String bankAccountId;
+    private String            userId;
+
+    private String            bankAccountId;
 
 }

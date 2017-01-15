@@ -1,30 +1,30 @@
-package org.github.finance.mall.share.payment.dto;
+package org.github.finance.mall.payment.domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.github.finance.mall.share.NotNull;
+import org.github.finance.mall.share.payment.constance.PaymentStatusEnum;
 import org.github.finance.mall.share.payment.constance.PaymentWayEnum;
 
 import lombok.Data;
 
 /**
- * @author ligaofeng 2017年1月13日 下午12:57:17
+ * @author ligaofeng 2017年1月14日 下午9:39:10
  */
-@NotNull
 @Data
-public class ApplyPaymentDTO implements Serializable {
+public class PaymentDomain {
 
-    private static final long serialVersionUID = 4910811436892726662L;
+    private String            paymentRequestId;
 
     private String            userId;
 
-    private String            paymentRequestId;
+    private String            orderId;
 
     private String            productOfferingCode;
 
     private BigDecimal        paymentAmount;
+
+    private PaymentStatusEnum paymentStatus;
 
     private Date              applyPaymentTime;
 

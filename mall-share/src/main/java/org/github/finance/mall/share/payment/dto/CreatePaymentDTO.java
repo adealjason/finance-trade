@@ -1,5 +1,6 @@
 package org.github.finance.mall.share.payment.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.github.finance.mall.share.NotNull;
@@ -11,14 +12,16 @@ import lombok.Data;
  */
 @NotNull
 @Data
-public class CreatePaymentDTO {
+public class CreatePaymentDTO implements Serializable {
 
-    private String     userId;
+    private static final long serialVersionUID = -7918166138879008676L;
 
-    private String     orderId;
+    private String            userId;
 
-    private String     productOfferingCode;
+    private String            orderId;
 
-    private BigDecimal paymentAmount;
+    private String            productOfferingCode;
+
+    private BigDecimal        paymentAmount;
 
 }

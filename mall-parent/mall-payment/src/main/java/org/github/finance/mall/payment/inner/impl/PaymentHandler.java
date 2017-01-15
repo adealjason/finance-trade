@@ -5,17 +5,16 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import org.github.finance.mall.NotNull;
 import org.github.finance.mall.payment.SpringHolder;
-import org.github.finance.mall.payment.constance.PaymentStatusEnum;
-import org.github.finance.mall.payment.constance.PaymentWayEnum;
-import org.github.finance.mall.payment.dao.dataobject.PaymentRequestDO;
-import org.github.finance.mall.payment.dto.ApplyPaymentDTO;
+import org.github.finance.mall.payment.domain.PaymentDomain;
 import org.github.finance.mall.payment.exception.MallPaymentException;
 import org.github.finance.mall.payment.inner.IPaymentHandler;
 import org.github.finance.mall.payment.inner.impl.PaymentHandler.PaymentWay.ApplyPaymentRequest;
 import org.github.finance.mall.payment.inner.way.ApplyPaymentRequestHelper;
 import org.github.finance.mall.payment.service.IPaymentRequestService;
+import org.github.finance.mall.share.NotNull;
+import org.github.finance.mall.share.payment.constance.PaymentStatusEnum;
+import org.github.finance.mall.share.payment.constance.PaymentWayEnum;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
@@ -32,44 +31,43 @@ public class PaymentHandler implements IPaymentHandler {
     private IPaymentRequestService paymentRequestService;
 
     @Override
-    public PaymentWay.PaymentResult applyPayment(ApplyPaymentDTO applyPaymentDTO) throws MallPaymentException {
+    public PaymentWay.PaymentResult applyPayment(PaymentDomain paymentDomain) throws MallPaymentException {
         PaymentWay.PaymentResult paymentResult = new PaymentWay.PaymentResult();
-        PaymentRequestDO paymentRequestDO = this.checkPaymentId(applyPaymentDTO.getPaymentId());
+        this.checkPaymentId(paymentDomain.getPaymentRequestId());
         try {
-            ApplyPaymentRequest applyPaymentRequest = ApplyPaymentRequestHelper.toApplyPaymentRequest(applyPaymentDTO);
+            ApplyPaymentRequest applyPaymentRequest = ApplyPaymentRequestHelper.toApplyPaymentRequest(paymentDomain);
 
             log.info("--->execute payment:{}", applyPaymentRequest);
 
-            this.turnPaymentStatus(paymentRequestDO, PaymentStatusEnum.PAYMENT_PROCESS);
+            this.turnPaymentStatus(paymentDomain, PaymentStatusEnum.PAYMENT_PROCESS);
 
-            PaymentWay paymentWay = this.getPaymentWay(applyPaymentDTO.getPaymentWay());
+            PaymentWay paymentWay = this.getPaymentWay(paymentDomain.getPaymentWay());
 
             paymentResult = paymentWay.applyPayment(applyPaymentRequest);
 
-            this.turnPaymentStatus(paymentRequestDO, PaymentStatusEnum.PAYMENT_SUCCESS);
+            this.turnPaymentStatus(paymentDomain, PaymentStatusEnum.PAYMENT_SUCCESS);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             paymentResult.setResult(false);
             paymentResult.setMessage(e.getMessage());
-            this.turnPaymentStatus(paymentRequestDO, PaymentStatusEnum.PAYMENT_FAIL);
+            this.turnPaymentStatus(paymentDomain, PaymentStatusEnum.PAYMENT_FAIL);
         }
 
         return paymentResult;
     }
 
-    private void turnPaymentStatus(PaymentRequestDO paymentRequestDO, PaymentStatusEnum paymentStatus)
+    private void turnPaymentStatus(PaymentDomain paymentDomain, PaymentStatusEnum paymentStatus)
             throws MallPaymentException {
-        paymentRequestDO.setPaymentStatus(paymentStatus.name());
-        paymentRequestService.updatePaymentRequest(paymentRequestDO);
+        paymentDomain.setPaymentStatus(paymentStatus);
+        paymentRequestService.updatePaymentRequest(paymentDomain);
     }
 
-    private PaymentRequestDO checkPaymentId(String paymentId) throws MallPaymentException {
-        PaymentRequestDO paymentRequestDO = paymentRequestService.loadPaymentRequestDO(paymentId);
+    private void checkPaymentId(String paymentId) throws MallPaymentException {
+        PaymentDomain paymentDomain = paymentRequestService.loadPaymentRequestDomain(paymentId);
 
-        if (paymentRequestDO == null) {
+        if (paymentDomain == null) {
             throw new MallPaymentException("待支付订单不存在:" + paymentId);
         }
-        return paymentRequestDO;
     }
 
     private PaymentWay getPaymentWay(PaymentWayEnum paymentWay) throws MallPaymentException {

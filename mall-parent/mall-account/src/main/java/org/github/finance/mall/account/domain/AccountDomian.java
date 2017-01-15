@@ -22,6 +22,6 @@ public class AccountDomian {
 
     private List<AccountAdressDomain> accountAdressDomainList;
 
-    private List<BankAccountDomain>   bankAccountDomain;
+    private List<BankAccountDomain>   bankAccountDomainList;
 
 }

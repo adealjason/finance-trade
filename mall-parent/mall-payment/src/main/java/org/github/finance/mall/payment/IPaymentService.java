@@ -1,9 +1,9 @@
 package org.github.finance.mall.payment;
 
-import org.github.finance.mall.payment.dto.ApplyPaymentDTO;
-import org.github.finance.mall.payment.dto.CreatePaymentDTO;
 import org.github.finance.mall.payment.exception.MallPaymentException;
 import org.github.finance.mall.payment.inner.impl.PaymentHandler.PaymentWay;
+import org.github.finance.mall.share.payment.dto.ApplyPaymentDTO;
+import org.github.finance.mall.share.payment.dto.CreatePaymentDTO;
 
 /**
  * @author ligaofeng 2017年1月13日 下午12:48:27

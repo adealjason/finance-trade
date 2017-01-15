@@ -1,6 +1,6 @@
 package org.github.finance.mall.payment.service;
 
-import org.github.finance.mall.payment.dao.dataobject.PaymentRequestDO;
+import org.github.finance.mall.payment.domain.PaymentDomain;
 import org.github.finance.mall.payment.exception.MallPaymentException;
 
 /**
@@ -9,22 +9,22 @@ import org.github.finance.mall.payment.exception.MallPaymentException;
 public interface IPaymentRequestService {
 
     /**
-     * @param paymentRequestDO
+     * @param paymentDomain
      * @return
      * @throws MallPaymentException
      */
-    public String savePaymentRequest(PaymentRequestDO paymentRequestDO) throws MallPaymentException;
+    public String savePaymentRequest(PaymentDomain paymentDomain) throws MallPaymentException;
 
     /**
-     * @param paymentRequestDO
+     * @param paymentDomain
      * @throws MallPaymentException
      */
-    public void updatePaymentRequest(PaymentRequestDO paymentRequestDO) throws MallPaymentException;
+    public void updatePaymentRequest(PaymentDomain paymentDomain) throws MallPaymentException;
 
     /**
      * @param paymentId
      * @return
      * @throws MallPaymentException
      */
-    public PaymentRequestDO loadPaymentRequestDO(String paymentId) throws MallPaymentException;
+    public PaymentDomain loadPaymentRequestDomain(String paymentId) throws MallPaymentException;
 }

@@ -14,7 +14,16 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.github.finance.mall</groupId>
+			<artifactId>mall-share</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.github.finance.mall</groupId>
 			<artifactId>mall-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.github.finance.mall</groupId>
+			<artifactId>mall-payment</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

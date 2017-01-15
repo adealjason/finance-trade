@@ -1,5 +1,6 @@
 package org.github.finance.mall.share.order.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.github.finance.mall.share.NotNull;
@@ -9,30 +10,26 @@ import lombok.Data;
 /**
  * @author ligaofeng 2017年1月13日 下午5:20:44
  */
+@NotNull
 @Data
-public class CreateOrderDTO {
+public class CreateOrderDTO implements Serializable {
 
-    @NotNull
-    private String     userId;
+    private static final long serialVersionUID = 1820046840793034051L;
 
-    @NotNull
-    private String     addressee;
+    private String            userId;
 
-    @NotNull
-    private String     address;
+    private String            addressee;
 
-    @NotNull
-    private String     addresseePhone;
+    private String            address;
 
-    private String     zipCode;
+    private String            addresseePhone;
 
-    @NotNull
-    private String     expressId;
+    private String            zipCode;
 
-    @NotNull
-    private String     productOfferingCode;
+    private String            expressId;
 
-    @NotNull
-    private BigDecimal buyCopies;
+    private String            productOfferingCode;
+
+    private BigDecimal        buyCopies;
 
 }

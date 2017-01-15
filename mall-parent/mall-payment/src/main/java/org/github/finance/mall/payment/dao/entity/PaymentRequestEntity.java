@@ -1,9 +1,9 @@
-package org.github.finance.mall.payment.dao.dataobject;
+package org.github.finance.mall.payment.dao.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.github.finance.mall.NotNull;
+import org.github.finance.mall.share.NotNull;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import lombok.Data;
  * @author ligaofeng 2017年1月13日 下午1:59:24
  */
 @Data
-public class PaymentRequestDO {
+public class PaymentRequestEntity {
 
     @NotNull
     private String     id;

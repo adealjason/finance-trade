@@ -1,6 +1,6 @@
 package org.github.finance.mall.payment.inner;
 
-import org.github.finance.mall.payment.dto.ApplyPaymentDTO;
+import org.github.finance.mall.payment.domain.PaymentDomain;
 import org.github.finance.mall.payment.exception.MallPaymentException;
 import org.github.finance.mall.payment.inner.impl.PaymentHandler.PaymentWay;
 
@@ -10,9 +10,9 @@ import org.github.finance.mall.payment.inner.impl.PaymentHandler.PaymentWay;
 public interface IPaymentHandler {
 
     /**
-     * @param applyPaymentDTO
+     * @param paymentDomain
      * @return
      * @throws MallPaymentException
      */
-    public PaymentWay.PaymentResult applyPayment(ApplyPaymentDTO applyPaymentDTO) throws MallPaymentException;
+    public PaymentWay.PaymentResult applyPayment(PaymentDomain paymentDomain) throws MallPaymentException;
 }
