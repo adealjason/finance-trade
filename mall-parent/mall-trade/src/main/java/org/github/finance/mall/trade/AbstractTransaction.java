@@ -23,7 +23,7 @@ public abstract class AbstractTransaction<REQ, RSP> implements ITransaction<REQ,
         try {
             String transactionId = this.generateTransactionIdentification(request);
             TradeContext.getInstance().setTransactionId(transactionId);
-            TradeContext.getInstance().setTransactionService(this.getTransactionService());
+            TradeContext.getInstance().setTransactionService(this.getTransactionName());
 
             this.initEvent(request);
             this.checkRequestDuplicated(request);
@@ -49,14 +49,14 @@ public abstract class AbstractTransaction<REQ, RSP> implements ITransaction<REQ,
     protected abstract String generateTransactionIdentification(REQ request);
 
     private void publishEvent(REQ request) {
-        TransactionServiceEnum transcationService = this.getTransactionService();
+        TransactionEnum transcationService = this.getTransactionName();
         if (transcationService != null) {
             EventObject eventObject = TradeContext.getInstance().getEventObject();
             if (eventObject == null) {
-                log.warn("the request has no publish event,transcationService:{}", this.getTransactionService());
+                log.warn("the request has no publish event,transcationService:{}", this.getTransactionName());
                 return;
             }
-            eventObject.setTransaction(this.getTransactionService().name());
+            eventObject.setTransaction(this.getTransactionName().name());
             eventObject.setEventId(TradeContext.getInstance().getTransactionId());
             eventPublisher.publishAysnEvent(eventObject);
         }

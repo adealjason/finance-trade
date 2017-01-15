@@ -37,7 +37,7 @@ public class TradeContext {
 
     private String                                 transactionId = "-1";
 
-    private TransactionServiceEnum                 transactionService;
+    private TransactionEnum                 transactionService;
 
     private TradeContext() {
 

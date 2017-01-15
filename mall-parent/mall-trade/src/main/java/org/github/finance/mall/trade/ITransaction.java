@@ -10,7 +10,7 @@ public interface ITransaction<REQ, RSP> {
     /**
      * @return
      */
-    public TransactionServiceEnum getTransactionService();
+    public TransactionEnum getTransactionName();
 
     /**
      * @param request
