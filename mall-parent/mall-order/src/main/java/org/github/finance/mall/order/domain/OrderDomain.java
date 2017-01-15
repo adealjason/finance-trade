@@ -3,6 +3,7 @@ package org.github.finance.mall.order.domain;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.github.finance.mall.express.domain.ExpressDomain;
 import org.github.finance.mall.payment.domain.PaymentDomain;
 
 import lombok.Data;
@@ -28,5 +29,7 @@ public class OrderDomain {
     private List<OrderProductDomain> orderProductDomainList;
 
     private PaymentDomain            paymentDomain;
+
+    private ExpressDomain            expressDomain;
 
 }

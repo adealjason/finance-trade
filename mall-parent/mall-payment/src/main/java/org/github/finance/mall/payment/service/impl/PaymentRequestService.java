@@ -43,7 +43,7 @@ public class PaymentRequestService implements IPaymentRequestService {
     /**
      * @author ligaofeng 2017年1月13日 下午1:52:59
      */
-    public static class PaymentIdGenerator {
+    private static class PaymentIdGenerator {
 
         private PaymentIdGenerator() {
         }
