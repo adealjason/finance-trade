@@ -10,6 +10,8 @@ import org.github.finance.mall.order.service.IOrderRequestService;
 import org.github.finance.mall.payment.IPaymentService;
 import org.github.finance.mall.share.order.constance.OrderStatusEnum;
 import org.github.finance.mall.share.order.dto.CreateOrderDTO;
+import org.github.finance.mall.share.payment.dto.CreatePaymentDTO;
+import org.github.finance.mall.share.storeHouse.dto.PreSaleDTO;
 import org.github.finance.mall.storehouse.IStoreHourseService;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +33,39 @@ public class OrderService implements IOrderService {
 
     @Override
     public void createOrder(CreateOrderDTO createOrderDTO) throws MallOrderException {
-        OrderDomain orderDomain = OrderDomainHelper.toOrderDomain(createOrderDTO);
-        //创建订单
-        orderDomain.setOderStatus(OrderStatusEnum.NEW);
-        orderRequestService.saveOrderRequest(orderDomain);
-        //产品预售
+        try {
+            OrderDomain orderDomain = OrderDomainHelper.toOrderDomain(createOrderDTO);
+            //创建订单
+            orderDomain.setOderStatus(OrderStatusEnum.NEW);
+            orderRequestService.saveOrderRequest(orderDomain);
+            //产品预售
+            PreSaleDTO preSaleDTO = this.createPreSaleDTO(createOrderDTO, orderDomain.getOrderId());
+            storeHourseService.preSale(preSaleDTO);
+            //创建待支付流水
+            CreatePaymentDTO createPaymentDTO = this.createPaymentDTO(createOrderDTO, orderDomain.getOrderId());
+            paymentService.createPayment(createPaymentDTO);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
 
-        //创建待支付流水
+    private CreatePaymentDTO createPaymentDTO(CreateOrderDTO createOrderDTO, String orderId) {
+        CreatePaymentDTO createPaymentDTO = new CreatePaymentDTO();
+        createPaymentDTO.setUserId(createOrderDTO.getUserId());
+        createPaymentDTO.setPaymentAmount(createOrderDTO.getPaymentAmount());
+        createPaymentDTO.setProductOfferingCode(createOrderDTO.getProductOfferingCode());
+        createPaymentDTO.setOrderId(orderId);
+        return createPaymentDTO;
+    }
+
+    private PreSaleDTO createPreSaleDTO(CreateOrderDTO createOrderDTO, String orderId) {
+        PreSaleDTO preSaleDTO = new PreSaleDTO();
+        preSaleDTO.setApplyPurchaseDate(createOrderDTO.getApplyPurchaseDate());
+        preSaleDTO.setOrderId(orderId);
+        preSaleDTO.setProductOfferingCode(createOrderDTO.getProductOfferingCode());
+        preSaleDTO.setSize(createOrderDTO.getOrderProductSize());
+        preSaleDTO.setUserId(createOrderDTO.getUserId());
+        return preSaleDTO;
     }
 
 }

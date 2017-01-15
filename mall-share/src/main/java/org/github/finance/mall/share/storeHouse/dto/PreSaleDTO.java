@@ -1,7 +1,6 @@
 package org.github.finance.mall.share.storeHouse.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Data;
@@ -20,7 +19,7 @@ public class PreSaleDTO implements Serializable {
 
     private String            productOfferingCode;
 
-    private BigDecimal        size;
+    private int               size;
 
     private Date              applyPurchaseDate;
 }
