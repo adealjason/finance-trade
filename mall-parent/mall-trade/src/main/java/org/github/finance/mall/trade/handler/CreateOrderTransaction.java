@@ -47,7 +47,7 @@ public class CreateOrderTransaction extends AbstractTransaction<CreateOrderReque
 
             @Override
             public void assembleEvent(EventObject eventObject) {
-                log.info("assemble event.:{}", request);
+                log.info("assemble event:{}", request);
 
             }
         };
