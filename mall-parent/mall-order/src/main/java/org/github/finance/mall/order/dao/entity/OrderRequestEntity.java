@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @NotNull
 @Data
-public class OrderEntity {
+public class OrderRequestEntity {
 
     private String     id;
 

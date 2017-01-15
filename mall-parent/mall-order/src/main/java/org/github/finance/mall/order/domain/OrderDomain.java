@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.github.finance.mall.express.domain.ExpressDomain;
 import org.github.finance.mall.payment.domain.PaymentDomain;
+import org.github.finance.mall.share.order.constance.OrderStatusEnum;
 
 import lombok.Data;
 
@@ -25,7 +26,7 @@ public class OrderDomain {
 
     private String                   currency;
 
-    private String                   status;
+    private OrderStatusEnum          oderStatus;
 
     private Date                     outTime;
 
