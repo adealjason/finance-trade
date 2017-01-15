@@ -99,6 +99,9 @@ public class PaymentHandler implements IPaymentHandler {
             private String  paymentId;
 
             @NotNull
+            private String  orderId;
+
+            @NotNull
             private boolean result;
 
             private String  message;

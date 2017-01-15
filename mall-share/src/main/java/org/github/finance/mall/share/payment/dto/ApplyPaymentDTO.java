@@ -20,6 +20,8 @@ public class ApplyPaymentDTO implements Serializable {
 
     private String            userId;
 
+    private String            orderId;
+
     private String            paymentRequestId;
 
     private String            productOfferingCode;
