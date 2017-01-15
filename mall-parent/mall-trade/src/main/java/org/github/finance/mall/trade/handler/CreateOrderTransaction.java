@@ -30,14 +30,6 @@ public class CreateOrderTransaction extends AbstractTransaction<CreateOrderReque
     }
 
     @Override
-    protected void initEvent(CreateOrderRequest request) {
-        log.info("--->init event...");
-        EventObject eventObject = new EventObject();
-        eventObject.setEventId(this.generateTransactionIdentification(request));
-        eventObject.setTransaction(this.getTransactionName().name());
-    }
-
-    @Override
     protected CreateOrderResponse execute(CreateOrderRequest request) throws MallTradeException {
 
         return null;
@@ -47,6 +39,18 @@ public class CreateOrderTransaction extends AbstractTransaction<CreateOrderReque
     protected String generateTransactionIdentification(CreateOrderRequest request) {
 
         return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
+    @Override
+    protected InitEventCallBack setInitEventCallBack(final CreateOrderRequest request) {
+        return new InitEventCallBack() {
+
+            @Override
+            public void assembleEvent(EventObject eventObject) {
+                log.info("assemble event.:{}", request);
+
+            }
+        };
     }
 
 }

@@ -42,11 +42,30 @@ public abstract class AbstractTransaction<REQ, RSP> implements ITransaction<REQ,
 
     protected abstract void checkParams(REQ request) throws MallTradeException;
 
-    protected abstract void initEvent(REQ request);
-
     protected abstract RSP execute(REQ request) throws MallTradeException;
 
     protected abstract String generateTransactionIdentification(REQ request);
+
+    protected abstract InitEventCallBack setInitEventCallBack(REQ request);
+
+    protected interface InitEventCallBack {
+
+        /**
+         * @param eventObject
+         */
+        public void assembleEvent(EventObject eventObject);
+    }
+
+    private void initEvent(REQ request) {
+        EventObject eventObject = new EventObject();
+        eventObject.setEventId(this.generateTransactionIdentification(request));
+        eventObject.setTransaction(this.getTransactionName().name());
+        TradeContext.getInstance().setEventObject(eventObject);
+        InitEventCallBack initEventCallBack = this.setInitEventCallBack(request);
+        if (initEventCallBack != null) {
+            initEventCallBack.assembleEvent(eventObject);
+        }
+    }
 
     private void publishEvent(REQ request) {
         TransactionEnum transcationService = this.getTransactionName();
