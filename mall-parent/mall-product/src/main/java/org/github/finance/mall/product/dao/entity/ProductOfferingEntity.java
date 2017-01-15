@@ -21,6 +21,9 @@ public class ProductOfferingEntity {
 
     private String productDefinitionId;
 
+    //在售容量
+    private int    capacity;
+
     private String stutus;
 
     private String isDeleted;

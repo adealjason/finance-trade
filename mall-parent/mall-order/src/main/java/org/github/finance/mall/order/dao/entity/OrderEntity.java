@@ -26,6 +26,8 @@ public class OrderEntity {
 
     private String     status;
 
+    private Date       outTime;
+
     //快递流水记录，通常一个订单一个快递单号
     private String     expressId;
 

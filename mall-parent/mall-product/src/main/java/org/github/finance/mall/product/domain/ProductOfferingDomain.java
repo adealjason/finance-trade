@@ -18,6 +18,9 @@ public class ProductOfferingDomain {
 
     private String                     stutus;
 
+    //在售容量
+    private int                        capacity;
+
     private List<MarketRuleDomain>     marketRuleDomainList;
 
     private List<ProductPaymentDomain> productPaymentDomainList;

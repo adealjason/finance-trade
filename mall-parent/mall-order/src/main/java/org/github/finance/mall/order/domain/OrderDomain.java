@@ -1,6 +1,7 @@
 package org.github.finance.mall.order.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import org.github.finance.mall.express.domain.ExpressDomain;
@@ -25,6 +26,8 @@ public class OrderDomain {
     private String                   currency;
 
     private String                   status;
+
+    private Date                     outTime;
 
     private List<OrderProductDomain> orderProductDomainList;
 
