@@ -1,4 +1,4 @@
-package org.github.finance.mall.trade.handler;
+package org.github.finance.mall.trade.transaction;
 
 import java.util.UUID;
 
