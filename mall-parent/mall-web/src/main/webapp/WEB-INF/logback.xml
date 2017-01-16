@@ -14,7 +14,7 @@
     <appender name="MYBATIS_FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/mybatis/mybatis.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/mybatis/mybatis.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -29,7 +29,7 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/finance-info-%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/finance-info-%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -41,12 +41,12 @@
     <!-- mall.account -->
     <appender name="ACCOUNT_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/account/mall_account.log</file>
+        <file>/home/vm1/mall-log/log/account/mall_account.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/account/mall_account.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/account/mall_account.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -58,12 +58,12 @@
     <!-- mall.payment -->
     <appender name="PAYMENT_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/payment/mall_payment.log</file>
+        <file>/home/vm1/mall-log/log/payment/mall_payment.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/payment/mall_payment.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/payment/mall_payment.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -75,12 +75,12 @@
     <!-- mall.order -->
     <appender name="ORDER_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/order/mall_order.log</file>
+        <file>/home/vm1/mall-log/log/order/mall_order.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/order/mall_order.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/order/mall_order.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -92,12 +92,12 @@
     <!-- mall.express -->
     <appender name="EXPRESS_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/express/mall_express.log</file>
+        <file>/home/vm1/mall-log/log/express/mall_express.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/express/mall_express.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/express/mall_express.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -109,12 +109,12 @@
     <!-- mall.product -->
     <appender name="PRODUCT_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/product/mall_product.log</file>
+        <file>/home/vm1/mall-log/log/product/mall_product.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/product/mall_product.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/product/mall_product.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -126,12 +126,12 @@
     <!-- mall.trade -->
     <appender name="TRADE_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/trade/mall_trade.log</file>
+        <file>/home/vm1/mall-log/log/trade/mall_trade.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/trade/mall_trade.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/trade/mall_trade.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -143,12 +143,12 @@
     <!-- mall.store -->
     <appender name="STORE_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/store/mall_store.log</file>
+        <file>/home/vm1/mall-log/log/store/mall_store.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/store/mall_store.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/store/mall_store.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -160,12 +160,12 @@
     <!-- mall.test -->
     <appender name="TEST_FILE_INFO"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/log/test/mall_test.log</file>
+        <file>/home/vm1/mall-log/log/test/mall_test.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/log/test/mall_test.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/log/test/mall_test.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -179,12 +179,12 @@
     <!-- mall.account -->
     <appender name="ACCOUNT_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/account/collect_mall_account.log</file>
+        <file>/home/vm1/mall-log/collect/account/collect_mall_account.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/account/collect_mall_account.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/account/collect_mall_account.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -196,12 +196,12 @@
     <!-- mall.payment -->
     <appender name="PAYMENT_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/payment/collect_mall_payment.log</file>
+        <file>/home/vm1/mall-log/collect/payment/collect_mall_payment.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/payment/collect_mall_payment.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/payment/collect_mall_payment.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -213,12 +213,12 @@
     <!-- mall.order -->
     <appender name="ORDER_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/order/collect_mall_order.log</file>
+        <file>/home/vm1/mall-log/collect/order/collect_mall_order.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/order/collect_mall_order.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/order/collect_mall_order.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -230,12 +230,12 @@
     <!-- mall.express-->
     <appender name="EXPRESS_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/express/collect_mall_express.log</file>
+        <file>/home/vm1/mall-log/collect/express/collect_mall_express.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/express/collect_mall_express.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/express/collect_mall_express.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -247,12 +247,12 @@
     <!-- mall.product-->
     <appender name="PRODUCT_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/product/collect_mall_product.log</file>
+        <file>/home/vm1/mall-log/collect/product/collect_mall_product.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/product/collect_mall_product.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/product/collect_mall_product.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -264,12 +264,12 @@
     <!-- mall.trade-->
     <appender name="TRADE_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/trade/collect_mall_trade.log</file>
+        <file>/home/vm1/mall-log/collect/trade/collect_mall_trade.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/trade/collect_mall_trade.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/trade/collect_mall_trade.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -281,12 +281,12 @@
     <!-- mall.store-->
     <appender name="STORE_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/store/collect_mall_store.log</file>
+        <file>/home/vm1/mall-log/collect/store/collect_mall_store.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/store/collect_mall_store.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/store/collect_mall_store.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -298,12 +298,12 @@
     <!-- mall.test-->
     <appender name="TEST_FILE_COLLECT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${finance.mall.log.dir}/collect/test/collect_mall_test.log</file>
+        <file>/home/vm1/mall-log/collect/test/collect_mall_test.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${finance.mall.log.dir}/collect/test/collect_mall_test.%d{yyyy-MM-dd}.log
+            <fileNamePattern>/home/vm1/mall-log/collect/test/collect_mall_test.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
