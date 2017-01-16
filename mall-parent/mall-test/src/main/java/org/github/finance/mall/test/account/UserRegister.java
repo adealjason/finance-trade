@@ -24,7 +24,7 @@ public class UserRegister implements Runnable {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(1 * 1000l);
+                Thread.sleep(60 * 1000l);
                 UserRegisterDTO userRegisterDTO = this.generateUserRegisterDTO();
                 userAccountService.register(userRegisterDTO);
             } catch (Exception e) {
