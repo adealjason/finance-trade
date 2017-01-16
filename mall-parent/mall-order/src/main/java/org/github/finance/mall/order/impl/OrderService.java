@@ -32,7 +32,7 @@ public class OrderService implements IOrderService {
     private IPaymentService      paymentService;
 
     @Override
-    public void createOrder(CreateOrderDTO createOrderDTO) throws MallOrderException {
+    public String createOrder(CreateOrderDTO createOrderDTO) throws MallOrderException {
         try {
             OrderDomain orderDomain = OrderDomainHelper.toOrderDomain(createOrderDTO);
             //创建订单
@@ -44,8 +44,10 @@ public class OrderService implements IOrderService {
             //创建待支付流水
             CreatePaymentDTO createPaymentDTO = this.createPaymentDTO(createOrderDTO, orderDomain.getOrderId());
             paymentService.createPayment(createPaymentDTO);
+
+            return orderDomain.getOrderId();
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            throw new MallOrderException(e);
         }
     }
 

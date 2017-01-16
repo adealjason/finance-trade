@@ -33,8 +33,6 @@ public class CreateOrderDTO implements Serializable {
 
     private String                productOfferingCode;
 
-    private BigDecimal            buyCopies;
-
     private Date                  applyPurchaseDate;
 
     private List<OrderProductDTO> orderProductDTOList;

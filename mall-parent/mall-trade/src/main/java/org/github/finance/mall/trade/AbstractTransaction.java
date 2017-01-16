@@ -19,7 +19,8 @@ public abstract class AbstractTransaction<REQ, RSP> implements ITransaction<REQ,
 
     @Override
     public RSP invoke(REQ request) {
-        RSP rsp = null;
+        log.info("--->transaction start:{}", request);
+        RSP response = null;
         try {
             String transactionId = this.generateTransactionIdentification(request);
             TradeContext.getInstance().setTransactionId(transactionId);
@@ -29,15 +30,17 @@ public abstract class AbstractTransaction<REQ, RSP> implements ITransaction<REQ,
             this.checkRequestDuplicated(request);
             this.checkBusinessDuplicated(request);
             this.checkParams(request);
-            return this.execute(request);
+            response = this.execute(request);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            response = this.getTransactionResponseCallBack().getFailResponse(request, e);
         } finally {
+            log.info("--->transaction response:{}", response);
             TradeContext.getInstance().clear();
             this.publishEvent(request);
             this.removeRequestCache(request);
         }
-        return rsp;
+        return response;
     }
 
     protected abstract void checkParams(REQ request) throws MallTradeException;
@@ -46,14 +49,34 @@ public abstract class AbstractTransaction<REQ, RSP> implements ITransaction<REQ,
 
     protected abstract String generateTransactionIdentification(REQ request);
 
-    protected abstract InitEventCallBack setInitEventCallBack(REQ request);
+    protected abstract InitEventCallBack<REQ> getInitEventCallBack();
 
-    protected interface InitEventCallBack {
+    protected abstract TransactionResponseCallBack<REQ, RSP> getTransactionResponseCallBack();
+
+    protected interface InitEventCallBack<REQ> {
 
         /**
          * @param eventObject
+         * @param request
          */
-        public void assembleEvent(EventObject eventObject);
+        public void assembleEvent(EventObject eventObject, REQ request);
+    }
+
+    protected interface TransactionResponseCallBack<REQ, RSP> {
+
+        /**
+         * @param request
+         * @param objects
+         * @return
+         */
+        public RSP getSuccessResponse(REQ request, Object... objects);
+
+        /**
+         * @param request
+         * @param objects
+         * @return
+         */
+        public RSP getFailResponse(REQ request, Object... objects);
     }
 
     private void initEvent(REQ request) {
@@ -61,9 +84,9 @@ public abstract class AbstractTransaction<REQ, RSP> implements ITransaction<REQ,
         eventObject.setEventId(this.generateTransactionIdentification(request));
         eventObject.setTransaction(this.getTransactionName().name());
         TradeContext.getInstance().setEventObject(eventObject);
-        InitEventCallBack initEventCallBack = this.setInitEventCallBack(request);
+        InitEventCallBack<REQ> initEventCallBack = this.getInitEventCallBack();
         if (initEventCallBack != null) {
-            initEventCallBack.assembleEvent(eventObject);
+            initEventCallBack.assembleEvent(eventObject, request);
         }
     }
 

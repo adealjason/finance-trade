@@ -14,5 +14,5 @@ public interface IOrderService {
      * @param createOrderDTO
      * @throws MallOrderException
      */
-    public void createOrder(CreateOrderDTO createOrderDTO) throws MallOrderException;
+    public String createOrder(CreateOrderDTO createOrderDTO) throws MallOrderException;
 }
