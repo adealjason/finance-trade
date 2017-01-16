@@ -5,7 +5,6 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.github.finance.mall.order.IOrderService;
-import org.github.finance.mall.order.exception.MallOrderException;
 import org.github.finance.mall.share.order.dto.CreateOrderDTO;
 import org.github.finance.mall.share.trade.EventObject;
 import org.github.finance.mall.share.trade.TransactionResult;
@@ -37,6 +36,7 @@ public class CreateOrderTransaction extends AbstractTransaction<CreateOrderReque
     @Override
     protected void checkParams(CreateOrderRequest request) throws MallTradeException {
         log.info("--->check params:{}", request);
+
     }
 
     @Override
@@ -46,7 +46,7 @@ public class CreateOrderTransaction extends AbstractTransaction<CreateOrderReque
             BeanUtils.copyProperties(request, createOrderDTO);
             String orderId = orderService.createOrder(createOrderDTO);
             return this.getTransactionResponseCallBack().getSuccessResponse(request, orderId);
-        } catch (MallOrderException e) {
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
             return this.getTransactionResponseCallBack().getFailResponse(request, e);
         }
@@ -67,7 +67,7 @@ public class CreateOrderTransaction extends AbstractTransaction<CreateOrderReque
 
         @Override
         public void assembleEvent(EventObject eventObject, CreateOrderRequest request) {
-            log.info("assemble event:{}", request);
+            log.info("assemble event:{},request:{}", eventObject, request);
 
         }
     };
