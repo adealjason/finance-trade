@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback Configuration. -->
+<configuration debug="false">
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d [%thread] %-5p [%c] [%F:%L] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mybatis输出 -->
+    <appender name="MYBATIS_FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/mybatis/mybatis.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志输出 -->
+    <!-- info -->
+    <appender name="info"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 可让每天产生一个日志文件，最多 30 个，自动回滚 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/finance-info-%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.account -->
+    <appender name="ACCOUNT_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/account/mall_account.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/account/mall_account.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.payment -->
+    <appender name="PAYMENT_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/payment/mall_payment.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/payment/mall_payment.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.order -->
+    <appender name="ORDER_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/order/mall_order.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/order/mall_order.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.express -->
+    <appender name="EXPRESS_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/express/mall_express.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/express/mall_express.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.product -->
+    <appender name="PRODUCT_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/product/mall_product.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/product/mall_product.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.trade -->
+    <appender name="TRADE_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/trade/mall_trade.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/trade/mall_trade.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.store -->
+    <appender name="STORE_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/store/mall_store.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/store/mall_store.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.test -->
+    <appender name="TEST_FILE_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/log/test/mall_test.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/log/test/mall_test.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    
+    <!-- 数据收集 -->
+    <!-- mall.account -->
+    <appender name="ACCOUNT_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/account/collect_mall_account.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/account/collect_mall_account.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.payment -->
+    <appender name="PAYMENT_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/payment/collect_mall_payment.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/payment/collect_mall_payment.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.order -->
+    <appender name="ORDER_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/order/collect_mall_order.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/order/collect_mall_order.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.express-->
+    <appender name="EXPRESS_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/express/collect_mall_express.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/express/collect_mall_express.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.product-->
+    <appender name="PRODUCT_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/product/collect_mall_product.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/product/collect_mall_product.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.trade-->
+    <appender name="TRADE_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/trade/collect_mall_trade.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/trade/collect_mall_trade.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.store-->
+    <appender name="STORE_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/store/collect_mall_store.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/store/collect_mall_store.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- mall.test-->
+    <appender name="TEST_FILE_COLLECT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${finance.mall.log.dir}/collect/test/collect_mall_test.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${finance.mall.log.dir}/collect/test/collect_mall_test.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- 采集事件日志 -->
+    <!-- collect.account -->
+    <logger name="org.github.finance.mall.account.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ACCOUNT_FILE_COLLECT"/>
+    </logger>
+    <logger name="org.github.finance.mall.bank.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ACCOUNT_FILE_COLLECT"/>
+    </logger>
+    <!-- collect.express -->
+    <logger name="org.github.finance.mall.express.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="EXPRESS_FILE_COLLECT"/>
+    </logger>
+    <!-- collect.order -->
+    <logger name="org.github.finance.mall.order.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ORDER_FILE_COLLECT"/>
+    </logger>
+    <logger name="org.github.finance.mall.shoppingCart.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ORDER_FILE_COLLECT"/>
+    </logger>
+    <!-- collect.payment -->
+    <logger name="org.github.finance.mall.payment.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="PAYMENT_FILE_COLLECT"/>
+    </logger>
+    <!-- collect.product -->
+    <logger name="org.github.finance.mall.product.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="PRODUCT_FILE_COLLECT"/>
+    </logger>
+    <!-- collect.store -->
+    <logger name="org.github.finance.mall.storehouse.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="STORE_FILE_COLLECT"/>
+    </logger>
+    <!-- collect.trade -->
+    <logger name="org.github.finance.mall.trade.log" level="INFO"
+            addtivity="false">
+        <appender-ref ref="TRADE_FILE_COLLECT"/>
+    </logger>
+    
+    <!-- 日志输出 -->
+    <!-- out.account -->
+    <logger name="org.github.finance.mall.account" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ACCOUNT_FILE_INFO"/>
+    </logger>
+    <logger name="org.github.finance.mall.asset" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ACCOUNT_FILE_INFO"/>
+    </logger>
+    <logger name="org.github.finance.mall.bank" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ACCOUNT_FILE_INFO"/>
+    </logger>
+    <!-- out.express -->
+    <logger name="org.github.finance.mall.express" level="INFO"
+            addtivity="false">
+        <appender-ref ref="EXPRESS_FILE_INFO"/>
+    </logger>
+    <!-- out.order -->
+    <logger name="org.github.finance.mall.order" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ORDER_FILE_INFO"/>
+    </logger>
+    <logger name="org.github.finance.mall.shoppingCart" level="INFO"
+            addtivity="false">
+        <appender-ref ref="ORDER_FILE_INFO"/>
+    </logger>
+    <!-- out.payment -->
+    <logger name="org.github.finance.mall.payment" level="INFO"
+            addtivity="false">
+        <appender-ref ref="PAYMENT_FILE_INFO"/>
+    </logger>
+    <!-- out.product -->
+    <logger name="org.github.finance.mall.product" level="INFO"
+            addtivity="false">
+        <appender-ref ref="PRODUCT_FILE_INFO"/>
+    </logger>
+    <!-- out.store -->
+    <logger name="org.github.finance.mall.storehouse" level="INFO"
+            addtivity="false">
+        <appender-ref ref="STORE_FILE_INFO"/>
+    </logger>
+    <!-- out.test -->
+    <logger name="org.github.finance.mall.test" level="INFO"
+            addtivity="false">
+        <appender-ref ref="TEST_FILE_INFO"/>
+    </logger>
+    <!-- out.trade -->
+    <logger name="org.github.finance.mall.trade" level="INFO"
+            addtivity="false">
+        <appender-ref ref="TRADE_FILE_INFO"/>
+    </logger>
+    
+    <logger name="org.apache.ibatis" level="DEBUG">
+        <appender-ref ref="MYBATIS_FILE"/>
+    </logger>
+
+    <logger name="org.apache">
+        <level value="INFO"/>
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="INFO"/>
+    </logger>
+
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="info"/>
+    </root>
+
+</configuration>
