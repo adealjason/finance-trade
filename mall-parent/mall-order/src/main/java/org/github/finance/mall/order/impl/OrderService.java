@@ -84,6 +84,7 @@ public class OrderService implements IOrderService {
         createPaymentDTO.setUserId(createOrderDTO.getUserId());
         createPaymentDTO.setPaymentAmount(createOrderDTO.getPaymentAmount());
         createPaymentDTO.setOrderId(orderId);
+        createPaymentDTO.setApplyPaymentTime(createOrderDTO.getApplyPurchaseDate());
         return createPaymentDTO;
     }
 
