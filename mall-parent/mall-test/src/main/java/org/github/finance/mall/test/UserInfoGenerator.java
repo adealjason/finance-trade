@@ -1,4 +1,4 @@
-package org.github.finance.mall.test.account;
+package org.github.finance.mall.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -104,9 +104,11 @@ public class UserInfoGenerator {
      */
     public static Map<String, String> getData() {
         Map<String, String> map = new HashMap<String, String>();
+        map.put("userId", String.valueOf((Math.random() * 9 + 1) * 100000000));
         map.put("name", getChineseName());
         map.put("sex", name_sex);
-        map.put("road", getRoad());
+        map.put("address", getRoad());
+        map.put("zipCode", String.valueOf((Math.random() * 9 + 1) * 100000000));
         map.put("tel", getTel());
         map.put("email", getEmail(6, 9));
         map.put("password", String.valueOf((Math.random() * 9 + 1) * 100000000));

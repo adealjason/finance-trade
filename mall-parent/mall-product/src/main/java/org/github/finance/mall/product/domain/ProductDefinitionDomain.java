@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ProductDefinitionDomain {
 
-    private String                      id;
+    private String                      productDifinitionId;
 
     private String                      productName;
 
@@ -20,7 +20,7 @@ public class ProductDefinitionDomain {
 
     private String                      status;
 
-    private String                      showOrder;
+    private int                         showOrder;
 
     private List<ProductOfferingDomain> productOfferingDomainList;
 }

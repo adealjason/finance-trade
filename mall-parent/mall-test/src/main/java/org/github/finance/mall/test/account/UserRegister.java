@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.github.finance.mall.account.IUserAccountService;
 import org.github.finance.mall.share.account.dto.UserRegisterDTO;
+import org.github.finance.mall.test.UserInfoGenerator;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;

@@ -10,6 +10,8 @@ import lombok.Data;
 @Data
 public class MarketRuleDomain {
 
+    private String ruleId;
+
     private String ruleName;
 
     private String ruleDesc;

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ProductCatalogDomain {
 
-    private String                        id;
+    private String                        productCatalogId;
 
     private String                        catalog;
 
