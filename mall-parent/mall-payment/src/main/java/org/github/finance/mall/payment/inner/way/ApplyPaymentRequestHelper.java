@@ -21,7 +21,6 @@ public class ApplyPaymentRequestHelper {
         applyPaymentRequest.setPaymentId(paymentDomain.getPaymentRequestId());
         applyPaymentRequest.setPaymentAmount(paymentDomain.getPaymentAmount());
         applyPaymentRequest.setPaymentWay(paymentDomain.getPaymentWay());
-        applyPaymentRequest.setProductOfferingCode(paymentDomain.getProductOfferingCode());
         applyPaymentRequest.setUserId(paymentDomain.getUserId());
         return applyPaymentRequest;
     }

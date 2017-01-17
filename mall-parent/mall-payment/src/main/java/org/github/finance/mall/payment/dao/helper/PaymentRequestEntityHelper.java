@@ -26,7 +26,6 @@ public class PaymentRequestEntityHelper {
         paymentRequestEntity.setGmtModified(now.toDate());
         paymentRequestEntity.setOrderId(paymentDomain.getOrderId());
         paymentRequestEntity.setPaymentAmount(paymentDomain.getPaymentAmount());
-        paymentRequestEntity.setProductOfferingCode(paymentDomain.getProductOfferingCode());
         paymentRequestEntity.setUserId(paymentDomain.getUserId());
         paymentRequestEntity.setPaymentStatus(paymentDomain.getPaymentStatus().name());
         return paymentRequestEntity;

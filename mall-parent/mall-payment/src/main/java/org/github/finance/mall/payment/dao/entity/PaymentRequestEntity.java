@@ -23,9 +23,6 @@ public class PaymentRequestEntity {
     private String     orderId;
 
     @NotNull
-    private String     productOfferingCode;
-
-    @NotNull
     private BigDecimal paymentAmount;
 
     @NotNull

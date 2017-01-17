@@ -20,8 +20,6 @@ public class PaymentDomain {
 
     private String            orderId;
 
-    private String            productOfferingCode;
-
     private BigDecimal        paymentAmount;
 
     private PaymentStatusEnum paymentStatus;

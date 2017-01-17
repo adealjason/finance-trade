@@ -118,8 +118,6 @@ public class PaymentHandler implements IPaymentHandler {
 
             private String         userId;
 
-            private String         productOfferingCode;
-
             private BigDecimal     paymentAmount;
 
             private Date           applyPaymentTime;

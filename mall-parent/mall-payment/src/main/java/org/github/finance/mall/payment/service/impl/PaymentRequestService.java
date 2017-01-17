@@ -65,7 +65,6 @@ public class PaymentRequestService implements IPaymentRequestService {
         paymentDomain.setPaymentAmount(new BigDecimal("129.19"));
         paymentDomain.setPaymentStatus(PaymentStatusEnum.PAYMENT_WAIT);
         paymentDomain.setPaymentWay(PaymentWayEnum.CHINA_PAY);
-        paymentDomain.setProductOfferingCode("12345678");
         paymentDomain.setUserId("12345678");
         return paymentDomain;
     }

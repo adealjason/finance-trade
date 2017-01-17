@@ -10,6 +10,7 @@ import org.github.finance.mall.order.service.IOrderRequestService;
 import org.github.finance.mall.payment.IPaymentService;
 import org.github.finance.mall.share.order.constance.OrderStatusEnum;
 import org.github.finance.mall.share.order.dto.CreateOrderDTO;
+import org.github.finance.mall.share.order.dto.OrderProductDTO;
 import org.github.finance.mall.share.payment.dto.CreatePaymentDTO;
 import org.github.finance.mall.share.storeHouse.dto.PreSaleDTO;
 import org.github.finance.mall.storehouse.IStoreHourseService;
@@ -39,8 +40,11 @@ public class OrderService implements IOrderService {
             orderDomain.setOderStatus(OrderStatusEnum.NEW);
             orderRequestService.saveOrderRequest(orderDomain);
             //产品预售
-            PreSaleDTO preSaleDTO = this.createPreSaleDTO(createOrderDTO, orderDomain.getOrderId());
-            storeHourseService.preSale(preSaleDTO);
+            for (OrderProductDTO an : createOrderDTO.getOrderProductDTOList()) {
+                PreSaleDTO preSaleDTO = this.createPreSaleDTO(createOrderDTO, orderDomain.getOrderId(),
+                        an.getProductOfferingCode());
+                storeHourseService.preSale(preSaleDTO);
+            }
             //创建待支付流水
             CreatePaymentDTO createPaymentDTO = this.createPaymentDTO(createOrderDTO, orderDomain.getOrderId());
             paymentService.createPayment(createPaymentDTO);
@@ -55,16 +59,15 @@ public class OrderService implements IOrderService {
         CreatePaymentDTO createPaymentDTO = new CreatePaymentDTO();
         createPaymentDTO.setUserId(createOrderDTO.getUserId());
         createPaymentDTO.setPaymentAmount(createOrderDTO.getPaymentAmount());
-        createPaymentDTO.setProductOfferingCode(createOrderDTO.getProductOfferingCode());
         createPaymentDTO.setOrderId(orderId);
         return createPaymentDTO;
     }
 
-    private PreSaleDTO createPreSaleDTO(CreateOrderDTO createOrderDTO, String orderId) {
+    private PreSaleDTO createPreSaleDTO(CreateOrderDTO createOrderDTO, String orderId, String productOfferingCode) {
         PreSaleDTO preSaleDTO = new PreSaleDTO();
         preSaleDTO.setApplyPurchaseDate(createOrderDTO.getApplyPurchaseDate());
         preSaleDTO.setOrderId(orderId);
-        preSaleDTO.setProductOfferingCode(createOrderDTO.getProductOfferingCode());
+        preSaleDTO.setProductOfferingCode(productOfferingCode);
         preSaleDTO.setSize(createOrderDTO.getOrderProductSize());
         preSaleDTO.setUserId(createOrderDTO.getUserId());
         return preSaleDTO;

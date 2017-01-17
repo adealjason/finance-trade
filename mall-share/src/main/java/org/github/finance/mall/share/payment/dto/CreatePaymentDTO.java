@@ -20,8 +20,6 @@ public class CreatePaymentDTO implements Serializable {
 
     private String            orderId;
 
-    private String            productOfferingCode;
-
     private BigDecimal        paymentAmount;
 
 }

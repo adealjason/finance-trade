@@ -45,6 +45,7 @@ public class CreateOrder implements Runnable {
         createOrderRequest.setExpressPrivoderId("YUNDA");
         createOrderRequest.setUserId(dataMap.get("userId"));
         createOrderRequest.setZipCode(dataMap.get("zipCode"));
+
         return createOrderRequest;
     }
 

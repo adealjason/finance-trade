@@ -28,8 +28,6 @@ public class CreateOrderRequest implements Serializable {
 
     private String                expressPrivoderId;
 
-    private String                productOfferingCode;
-
     private Date                  applyPurchaseDate;
 
     private List<OrderProductDTO> orderProductDTOList;
