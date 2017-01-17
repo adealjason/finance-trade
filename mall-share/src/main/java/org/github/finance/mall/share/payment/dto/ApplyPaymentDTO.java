@@ -24,8 +24,6 @@ public class ApplyPaymentDTO implements Serializable {
 
     private String            paymentRequestId;
 
-    private String            productOfferingCode;
-
     private BigDecimal        paymentAmount;
 
     private Date              applyPaymentTime;
