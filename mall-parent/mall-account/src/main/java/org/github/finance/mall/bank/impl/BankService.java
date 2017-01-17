@@ -11,11 +11,15 @@ import org.github.finance.mall.bank.domain.BankAccountDomain;
 import org.github.finance.mall.bank.domain.helper.BankAccountDomainHelper;
 import org.github.finance.mall.bank.exception.MallBankException;
 import org.github.finance.mall.bank.service.IBankAccountService;
+import org.github.finance.mall.share.bank.constance.BankAccountLogEvent;
 import org.github.finance.mall.share.bank.constance.BindCardStatusEnum;
 import org.github.finance.mall.share.bank.dto.BindCardDTO;
 import org.github.finance.mall.share.bank.dto.ChangeBankPhoneDTO;
 import org.github.finance.mall.share.bank.dto.UnBindCardDTO;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
+
+import com.google.common.collect.Maps;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +36,7 @@ public class BankService implements IBankService {
     private DataCollector       bankAccountEventLogCollector;
 
     @Override
-    public void bindCard(BindCardDTO bindCardDTO) throws MallBankException {
+    public void bindCard(final BindCardDTO bindCardDTO) throws MallBankException {
         log.info("--->user {} will to bind card {}", bindCardDTO.getUserId(), bindCardDTO.getCardNo());
 
         log.info("--->check whether the card is binded...");
@@ -48,12 +52,15 @@ public class BankService implements IBankService {
         bankAccountEventLogCollector.collectData(new DataCollectorProvider() {
             @Override
             public Map<String, String> getMetaData() {
-                return null;
+                Map<String, String> dataMap = Maps.newHashMap();
+                dataMap.put("userId", bindCardDTO.getUserId());
+                dataMap.put("bindCardDate", String.valueOf(DateTime.now().toDate().getTime()));
+                return dataMap;
             }
 
             @Override
             public String getLogEvent() {
-                return null;
+                return BankAccountLogEvent.BIND_CARD.name();
             }
         });
     }
@@ -65,12 +72,26 @@ public class BankService implements IBankService {
     }
 
     @Override
-    public void unBindCard(UnBindCardDTO unBindCardDTO) throws MallBankException {
+    public void unBindCard(final UnBindCardDTO unBindCardDTO) throws MallBankException {
 
         log.info("--->unBindCard cast to BankAccountDomain by unBindCardDTO:{}", unBindCardDTO);
         BankAccountDomain bankAccountDomain = BankAccountDomainHelper.toBankAccountDomain(unBindCardDTO);
         bankAccountDomain.setStatus(BindCardStatusEnum.UNBIND);
         bankAccountService.updateBankAccount(bankAccountDomain);
+        bankAccountEventLogCollector.collectData(new DataCollectorProvider() {
+            @Override
+            public Map<String, String> getMetaData() {
+                Map<String, String> dataMap = Maps.newHashMap();
+                dataMap.put("userId", unBindCardDTO.getUserId());
+                dataMap.put("bindCardDate", String.valueOf(DateTime.now().toDate().getTime()));
+                return dataMap;
+            }
+
+            @Override
+            public String getLogEvent() {
+                return BankAccountLogEvent.UNBIND.name();
+            }
+        });
     }
 
     @Override
