@@ -18,6 +18,8 @@ public class CreateExpressDTO implements Serializable {
 
     private String            userPhone;
 
+    private String            orderId;
+
     //收件人
     private String            addressee;
 

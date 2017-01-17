@@ -19,6 +19,8 @@ public class ExpressDomain {
 
     private String                userPhone;
 
+    private String                orderId;
+
     private ExpressStatusEnum     expressStatusEnum;
 
     private AccountAdressDomain   accountAdressDomain;
