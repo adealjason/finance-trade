@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import org.github.finance.mall.payment.SpringHolder;
 import org.github.finance.mall.test.account.UserOnline;
 import org.github.finance.mall.test.account.UserRegister;
+import org.github.finance.mall.test.trade.CreateOrder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,6 +25,8 @@ public class Bootstrap {
         executor.execute(SpringHolder.getBean(UserRegister.class));
         //user online
         executor.execute(SpringHolder.getBean(UserOnline.class));
+        //createOrder
+        executor.execute(SpringHolder.getBean(CreateOrder.class));
     }
 
 }

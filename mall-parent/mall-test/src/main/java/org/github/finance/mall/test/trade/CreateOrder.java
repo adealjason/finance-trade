@@ -37,6 +37,7 @@ public class CreateOrder implements Runnable {
     public void run() {
         while (true) {
             try {
+                Thread.sleep(1 * 1000);
                 CreateOrderRequest createOrderRequest = this.generateCreateOrderRequest();
                 createOrderTransaction.invoke(createOrderRequest);
             } catch (Exception e) {
