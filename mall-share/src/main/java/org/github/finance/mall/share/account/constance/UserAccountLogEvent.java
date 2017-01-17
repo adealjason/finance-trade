@@ -6,4 +6,8 @@ package org.github.finance.mall.share.account.constance;
 public enum UserAccountLogEvent {
 
     REGISTER,
+
+    LOGIN,
+
+    LOGOUT,
 }

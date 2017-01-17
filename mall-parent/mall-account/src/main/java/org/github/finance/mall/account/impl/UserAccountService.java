@@ -46,13 +46,13 @@ public class UserAccountService implements IUserAccountService {
         final String userId = userService.saveUser(accountPassportDomain);
         userAccountLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
-            public Map<String, Object> getMetaData() {
-                Map<String, Object> dataMap = Maps.newHashMap();
+            public Map<String, String> getMetaData() {
+                Map<String, String> dataMap = Maps.newHashMap();
                 dataMap.put("userId", userId);
                 dataMap.put("userName", userRegisterDTO.getUserName());
                 dataMap.put("userPhone", userRegisterDTO.getUserPhone());
                 dataMap.put("logInName", userRegisterDTO.getLogInName());
-                dataMap.put("registerDate", DateTime.now().toDate());
+                dataMap.put("registerDate", String.valueOf(DateTime.now().toDate().getTime()));
                 return dataMap;
             }
 
@@ -65,15 +65,49 @@ public class UserAccountService implements IUserAccountService {
     }
 
     @Override
-    public boolean logIn(UserLogInDTO userLogIn) throws MallAccountException {
+    public boolean logIn(final UserLogInDTO userLogIn) throws MallAccountException {
 
-        return userOnlineService.logIn(userLogIn.getLogInName(), userLogIn.getLogInPassword());
+        final boolean isLogIn = userOnlineService.logIn(userLogIn.getLogInName(), userLogIn.getLogInPassword());
+
+        userAccountLogEventCollector.collectData(new DataCollectorProvider() {
+            @Override
+            public Map<String, String> getMetaData() {
+                Map<String, String> dataMap = Maps.newHashMap();
+                dataMap.put("logInName", userLogIn.getLogInName());
+                dataMap.put("isLogIn", String.valueOf(isLogIn));
+                dataMap.put("logInDate", String.valueOf(DateTime.now().toDate().getTime()));
+                return dataMap;
+            }
+
+            @Override
+            public String getLogEvent() {
+                return UserAccountLogEvent.LOGIN.name();
+            }
+        });
+        return isLogIn;
     }
 
     @Override
-    public boolean logOut(LogOutDTO logOut) throws MallAccountException {
+    public boolean logOut(final LogOutDTO logOut) throws MallAccountException {
+        final boolean isLogOut = userOnlineService.logOut(logOut.getLogInName());
 
-        return userOnlineService.logOut(logOut.getLogInName());
+        userAccountLogEventCollector.collectData(new DataCollectorProvider() {
+
+            @Override
+            public Map<String, String> getMetaData() {
+                Map<String, String> dataMap = Maps.newHashMap();
+                dataMap.put("logInName", logOut.getLogInName());
+                dataMap.put("isLogOut", String.valueOf(isLogOut));
+                dataMap.put("logOutDate", String.valueOf(DateTime.now().toDate().getTime()));
+                return dataMap;
+            }
+
+            @Override
+            public String getLogEvent() {
+                return UserAccountLogEvent.LOGOUT.name();
+            }
+        });
+        return isLogOut;
     }
 
 }
