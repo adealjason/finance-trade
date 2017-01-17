@@ -2,6 +2,8 @@ package org.github.finance.mall.product.domain;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import lombok.Data;
 
 /**
@@ -24,4 +26,20 @@ public class ProductOfferingDomain {
     private List<MarketRuleDomain>     marketRuleDomainList;
 
     private List<ProductPaymentDomain> productPaymentDomainList;
+
+    /**
+     * @param ruleId
+     * @return
+     */
+    public MarketRuleDomain getMarketRule(String ruleId) {
+        if (CollectionUtils.isEmpty(this.getMarketRuleDomainList())) {
+            return null;
+        }
+        for (MarketRuleDomain an : this.getMarketRuleDomainList()) {
+            if (an.getRuleId().equals(ruleId)) {
+                return an;
+            }
+        }
+        return null;
+    }
 }

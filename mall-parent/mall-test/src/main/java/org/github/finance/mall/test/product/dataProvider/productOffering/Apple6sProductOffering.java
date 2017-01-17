@@ -35,4 +35,5 @@ public class Apple6sProductOffering extends ProductOfferingDomain {
     public static ProductOfferingDomain getIntance() {
         return apple6sProductOffering;
     }
+
 }
