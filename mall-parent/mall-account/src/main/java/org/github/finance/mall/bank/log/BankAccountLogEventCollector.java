@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class BankAccountEventLogCollector extends BasicDataCollectorSemantics implements DataCollectorOut {
+public class BankAccountLogEventCollector extends BasicDataCollectorSemantics implements DataCollectorOut {
 
     @Override
     public void sysoutMetaData(String metaData) {

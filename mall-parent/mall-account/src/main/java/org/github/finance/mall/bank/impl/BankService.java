@@ -33,7 +33,7 @@ public class BankService implements IBankService {
     @Resource
     private IBankAccountService bankAccountService;
     @Resource
-    private DataCollector       bankAccountEventLogCollector;
+    private DataCollector       bankAccountLogEventCollector;
 
     @Override
     public void bindCard(final BindCardDTO bindCardDTO) throws MallBankException {
@@ -49,7 +49,7 @@ public class BankService implements IBankService {
         this.assembleBindCardInfo(bankAccountDomain);
         bankAccountService.saveBankAccount(bankAccountDomain);
 
-        bankAccountEventLogCollector.collectData(new DataCollectorProvider() {
+        bankAccountLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
             public Map<String, String> getMetaData() {
                 Map<String, String> dataMap = Maps.newHashMap();
@@ -78,7 +78,8 @@ public class BankService implements IBankService {
         BankAccountDomain bankAccountDomain = BankAccountDomainHelper.toBankAccountDomain(unBindCardDTO);
         bankAccountDomain.setStatus(BindCardStatusEnum.UNBIND);
         bankAccountService.updateBankAccount(bankAccountDomain);
-        bankAccountEventLogCollector.collectData(new DataCollectorProvider() {
+
+        bankAccountLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
             public Map<String, String> getMetaData() {
                 Map<String, String> dataMap = Maps.newHashMap();
