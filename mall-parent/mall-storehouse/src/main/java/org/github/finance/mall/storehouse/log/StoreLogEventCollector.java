@@ -18,4 +18,9 @@ public class StoreLogEventCollector extends BasicDataCollectorSemantics implemen
         log.warn(metaData);
     }
 
+    @Override
+    public DataCollectorOut getDataCollectorOut() {
+        return this;
+    }
+
 }

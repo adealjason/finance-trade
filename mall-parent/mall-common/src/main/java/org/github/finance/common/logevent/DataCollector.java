@@ -8,10 +8,15 @@ import java.util.Map;
 public interface DataCollector {
 
     /**
+     * @return
+     */
+    public DataCollectorOut getDataCollectorOut();
+
+    /**
      * @param dataProvider
      * @return
      */
-    public String collectData(DataCollectorProvider dataProvider);
+    public void collectData(DataCollectorProvider dataProvider);
 
     /**
      * @author ligaofeng 2017年1月17日 下午1:30:57

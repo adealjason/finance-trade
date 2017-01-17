@@ -7,16 +7,17 @@ import org.apache.commons.lang.StringUtils;
 /**
  * @author ligaofeng 2017年1月17日 下午1:27:35
  */
-public class BasicDataCollectorSemantics implements DataCollector {
+public abstract class BasicDataCollectorSemantics implements DataCollector {
 
     @Override
-    public String collectData(DataCollectorProvider dataProvider) {
+    public void collectData(DataCollectorProvider dataProvider) {
+        DataCollectorOut dataCollectorOut = this.getDataCollectorOut();
         StringBuilder sbd = new StringBuilder();
         String logEvent = dataProvider.getLogEvent();
         Collection<String> data = dataProvider.getMetaData().values();
         String dataStr = StringUtils.join(data, ",");
         sbd.append(logEvent).append(":").append(dataStr);
-        return sbd.toString();
+        dataCollectorOut.sysoutMetaData(sbd.toString());
     }
 
 }

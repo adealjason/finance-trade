@@ -18,4 +18,9 @@ public class PaymentLogEventCollector extends BasicDataCollectorSemantics implem
         log.warn(metaData);
     }
 
+    @Override
+    public DataCollectorOut getDataCollectorOut() {
+        return this;
+    }
+
 }

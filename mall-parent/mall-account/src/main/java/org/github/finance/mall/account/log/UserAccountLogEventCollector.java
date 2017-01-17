@@ -18,4 +18,9 @@ public class UserAccountLogEventCollector extends BasicDataCollectorSemantics im
         log.warn(metaData);
     }
 
+    @Override
+    public DataCollectorOut getDataCollectorOut() {
+        return this;
+    }
+
 }

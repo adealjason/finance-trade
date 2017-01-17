@@ -18,4 +18,9 @@ public class TradeLogEventCollector extends BasicDataCollectorSemantics implemen
         log.warn(metaData);
     }
 
+    @Override
+    public DataCollectorOut getDataCollectorOut() {
+        return this;
+    }
+
 }
