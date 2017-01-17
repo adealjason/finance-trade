@@ -6,7 +6,7 @@ import org.github.finance.mall.share.account.dto.UserLogInDTO;
 import org.github.finance.mall.share.account.dto.UserRegisterDTO;
 
 /**
- * 用户注册
+ * 用户服务
  * 
  * @author ligaofeng 2017年1月12日 下午3:13:20
  */
