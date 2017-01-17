@@ -23,5 +23,5 @@ public interface IStoreHourseService {
      * @param soldDTO
      * @throws MallStoreHouseException
      */
-    public void sale(SoldDTO soldDTO) throws MallStoreHouseException;
+    public void sold(SoldDTO soldDTO) throws MallStoreHouseException;
 }
