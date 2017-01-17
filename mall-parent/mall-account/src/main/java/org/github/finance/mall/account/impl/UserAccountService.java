@@ -34,7 +34,7 @@ public class UserAccountService implements IUserAccountService {
     private IUserService       userService;
     @Resource
     private IUserOnlineService userOnlineService;
-    @Resource
+    @Resource(name = "userAccountLogEventCollector")
     private DataCollector      userAccountLogEventCollector;
 
     @Override

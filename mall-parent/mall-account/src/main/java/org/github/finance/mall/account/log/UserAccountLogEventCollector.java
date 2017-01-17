@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author ligaofeng 2017年1月16日 下午2:45:09
  */
 @Slf4j
-@Component
+@Component("userAccountLogEventCollector")
 public class UserAccountLogEventCollector extends BasicDataCollectorSemantics implements DataCollectorOut {
 
     @Override

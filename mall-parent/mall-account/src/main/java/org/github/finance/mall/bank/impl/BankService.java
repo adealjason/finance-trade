@@ -32,7 +32,7 @@ public class BankService implements IBankService {
 
     @Resource
     private IBankAccountService bankAccountService;
-    @Resource
+    @Resource(name = "bankAccountLogEventCollector")
     private DataCollector       bankAccountLogEventCollector;
 
     @Override
