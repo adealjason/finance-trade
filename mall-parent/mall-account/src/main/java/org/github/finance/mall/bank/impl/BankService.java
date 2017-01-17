@@ -1,7 +1,11 @@
 package org.github.finance.mall.bank.impl;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
+import org.github.finance.common.logevent.DataCollector;
+import org.github.finance.common.logevent.DataCollector.DataCollectorProvider;
 import org.github.finance.mall.bank.IBankService;
 import org.github.finance.mall.bank.domain.BankAccountDomain;
 import org.github.finance.mall.bank.domain.helper.BankAccountDomainHelper;
@@ -24,6 +28,8 @@ public class BankService implements IBankService {
 
     @Resource
     private IBankAccountService bankAccountService;
+    @Resource
+    private DataCollector       bankAccountEventLogCollector;
 
     @Override
     public void bindCard(BindCardDTO bindCardDTO) throws MallBankException {
@@ -38,6 +44,18 @@ public class BankService implements IBankService {
         BankAccountDomain bankAccountDomain = BankAccountDomainHelper.toBankAccountDomain(bindCardDTO);
         this.assembleBindCardInfo(bankAccountDomain);
         bankAccountService.saveBankAccount(bankAccountDomain);
+
+        bankAccountEventLogCollector.collectData(new DataCollectorProvider() {
+            @Override
+            public Map<String, String> getMetaData() {
+                return null;
+            }
+
+            @Override
+            public String getLogEvent() {
+                return null;
+            }
+        });
     }
 
     private void assembleBindCardInfo(BankAccountDomain bankAccountDomain) {
