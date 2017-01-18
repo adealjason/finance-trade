@@ -43,7 +43,7 @@ public class PaymentService implements IPaymentService {
                                                               @Override
                                                               protected DecimalFormat initialValue() {
                                                                   super.initialValue();
-                                                                  return new DecimalFormat("#.00");
+                                                                  return new DecimalFormat("#0.00");
                                                               }
                                                           };
 

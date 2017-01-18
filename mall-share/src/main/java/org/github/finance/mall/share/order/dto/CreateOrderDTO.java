@@ -61,7 +61,7 @@ public class CreateOrderDTO implements Serializable {
         //逐个商品累加
         for (OrderProductDTO an : orderProductDTOList) {
             BigDecimal currentAmount = new BigDecimal(an.getProductSize()).multiply(an.getUnitPrice());
-            if (an.getDiscountRate() != null) {
+            if (an.getDiscountRate() != null && an.getDiscountRate().compareTo(BigDecimal.ZERO) > 1) {
                 currentAmount = currentAmount.multiply(an.getDiscountRate());
             }
             paymentAmount = paymentAmount.add(currentAmount);

@@ -33,7 +33,7 @@ public class StoreHourseService implements IStoreHourseService {
                                                               @Override
                                                               protected DecimalFormat initialValue() {
                                                                   super.initialValue();
-                                                                  return new DecimalFormat("#.00");
+                                                                  return new DecimalFormat("#0.00");
                                                               }
                                                           };
 
