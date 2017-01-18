@@ -1,6 +1,6 @@
 package org.github.finance.mall.bank.impl;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -19,7 +19,7 @@ import org.github.finance.mall.share.bank.dto.UnBindCardDTO;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,11 +51,11 @@ public class BankService implements IBankService {
 
         bankAccountLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("userId", bindCardDTO.getUserId());
-                dataMap.put("bindCardDate", String.valueOf(DateTime.now().toDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(2);
+                dataList.add(bindCardDTO.getUserId());
+                dataList.add(String.valueOf(DateTime.now().toDate().getTime()));
+                return dataList;
             }
 
             @Override
@@ -81,11 +81,11 @@ public class BankService implements IBankService {
 
         bankAccountLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("userId", unBindCardDTO.getUserId());
-                dataMap.put("bindCardDate", String.valueOf(DateTime.now().toDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(2);
+                dataList.add(unBindCardDTO.getUserId());
+                dataList.add(String.valueOf(DateTime.now().toDate().getTime()));
+                return dataList;
             }
 
             @Override

@@ -1,6 +1,6 @@
 package org.github.finance.common.logevent;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -14,7 +14,7 @@ public abstract class BasicDataCollectorSemantics implements DataCollector {
         DataCollectorOut dataCollectorOut = this.getDataCollectorOut();
         StringBuilder sbd = new StringBuilder();
         String logEvent = dataProvider.getLogEvent();
-        Collection<String> data = dataProvider.getMetaData().values();
+        List<String> data = dataProvider.getMetaData();
         String dataStr = StringUtils.join(data, ",");
         sbd.append(logEvent).append(":").append(dataStr);
         dataCollectorOut.sysoutMetaData(sbd.toString());

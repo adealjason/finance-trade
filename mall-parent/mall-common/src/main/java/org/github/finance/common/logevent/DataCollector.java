@@ -1,6 +1,6 @@
 package org.github.finance.common.logevent;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author ligaofeng 2017年1月17日 下午1:16:45
@@ -46,6 +46,6 @@ public interface DataCollector {
          * 
          * @return
          */
-        public Map<String, String> getMetaData();
+        public List<String> getMetaData();
     }
 }

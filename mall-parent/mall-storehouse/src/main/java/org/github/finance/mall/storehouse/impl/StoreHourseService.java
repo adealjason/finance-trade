@@ -1,6 +1,7 @@
 package org.github.finance.mall.storehouse.impl;
 
-import java.util.Map;
+import java.text.DecimalFormat;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -13,7 +14,7 @@ import org.github.finance.mall.storehouse.IStoreHourseService;
 import org.github.finance.mall.storehouse.exception.MallStoreHouseException;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +26,16 @@ import lombok.extern.slf4j.Slf4j;
 public class StoreHourseService implements IStoreHourseService {
 
     @Resource(name = "storeLogEventCollector")
-    private DataCollector storeLogEventCollector;
+    private DataCollector                           storeLogEventCollector;
+
+    private static final ThreadLocal<DecimalFormat> local = new ThreadLocal<DecimalFormat>() {
+
+                                                              @Override
+                                                              protected DecimalFormat initialValue() {
+                                                                  super.initialValue();
+                                                                  return new DecimalFormat("#.00");
+                                                              }
+                                                          };
 
     @Override
     public void preSale(final PreSaleDTO preSaleDTO) throws MallStoreHouseException {
@@ -33,14 +43,14 @@ public class StoreHourseService implements IStoreHourseService {
 
         storeLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("userId", preSaleDTO.getUserId());
-                dataMap.put("orderId", preSaleDTO.getOrderId());
-                dataMap.put("productOfferingCode", preSaleDTO.getProductOfferingCode());
-                dataMap.put("size", String.valueOf(preSaleDTO.getSize()));
-                dataMap.put("applyPurchaseDate", String.valueOf(preSaleDTO.getApplyPurchaseDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(5);
+                dataList.add(preSaleDTO.getUserId());
+                dataList.add(preSaleDTO.getOrderId());
+                dataList.add(preSaleDTO.getProductOfferingCode());
+                dataList.add(String.valueOf(preSaleDTO.getSize()));
+                dataList.add(String.valueOf(preSaleDTO.getApplyPurchaseDate().getTime()));
+                return dataList;
             }
 
             @Override
@@ -57,12 +67,12 @@ public class StoreHourseService implements IStoreHourseService {
         storeLogEventCollector.collectData(new DataCollectorProvider() {
 
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("preSaleId", soldDTO.getPreSaleId());
-                dataMap.put("paymentAmount", soldDTO.getPaymentAmount().toString());
-                dataMap.put("paymentSuccessDate", String.valueOf(soldDTO.getPaymentSuccessDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(3);
+                dataList.add(soldDTO.getPreSaleId());
+                dataList.add(local.get().format(soldDTO.getPaymentAmount()));
+                dataList.add(String.valueOf(soldDTO.getPaymentSuccessDate().getTime()));
+                return dataList;
             }
 
             @Override

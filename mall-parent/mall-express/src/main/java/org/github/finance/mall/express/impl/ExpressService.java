@@ -1,6 +1,6 @@
 package org.github.finance.mall.express.impl;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -15,7 +15,7 @@ import org.github.finance.mall.share.express.dto.CreateExpressDTO;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,14 +37,14 @@ public class ExpressService implements IExpressService {
         expressLogEventCollector.collectData(new DataCollectorProvider() {
 
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("userId", createExpressDTO.getUserId());
-                dataMap.put("orderId", createExpressDTO.getOrderId());
-                dataMap.put("userPhone", createExpressDTO.getUserPhone());
-                dataMap.put("expressProviderId", createExpressDTO.getExpressProviderId());
-                dataMap.put("createExpressDate", String.valueOf(DateTime.now().toDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(5);
+                dataList.add(createExpressDTO.getUserId());
+                dataList.add(createExpressDTO.getOrderId());
+                dataList.add(createExpressDTO.getUserPhone());
+                dataList.add(createExpressDTO.getExpressProviderId());
+                dataList.add(String.valueOf(DateTime.now().toDate().getTime()));
+                return dataList;
             }
 
             @Override

@@ -1,6 +1,7 @@
 package org.github.finance.mall.payment.impl;
 
-import java.util.Map;
+import java.text.DecimalFormat;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -19,7 +20,7 @@ import org.github.finance.mall.share.payment.dto.ApplyPaymentDTO;
 import org.github.finance.mall.share.payment.dto.CreatePaymentDTO;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,11 +32,20 @@ import lombok.extern.slf4j.Slf4j;
 public class PaymentService implements IPaymentService {
 
     @Resource
-    private IPaymentRequestService paymentRequestService;
+    private IPaymentRequestService                  paymentRequestService;
     @Resource
-    private IPaymentHandler        paymentHandler;
+    private IPaymentHandler                         paymentHandler;
     @Resource(name = "paymentLogEventCollector")
-    private DataCollector          paymentLogEventCollector;
+    private DataCollector                           paymentLogEventCollector;
+
+    private static final ThreadLocal<DecimalFormat> local = new ThreadLocal<DecimalFormat>() {
+
+                                                              @Override
+                                                              protected DecimalFormat initialValue() {
+                                                                  super.initialValue();
+                                                                  return new DecimalFormat("#.00");
+                                                              }
+                                                          };
 
     @Override
     public String createPayment(final CreatePaymentDTO createPaymentDTO) throws MallPaymentException {
@@ -48,14 +58,14 @@ public class PaymentService implements IPaymentService {
         paymentLogEventCollector.collectData(new DataCollectorProvider() {
 
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("userId", createPaymentDTO.getUserId());
-                dataMap.put("orderId", createPaymentDTO.getOrderId());
-                dataMap.put("paymentId", paymentId);
-                dataMap.put("paymentAmount", createPaymentDTO.getPaymentAmount().toString());
-                dataMap.put("applyPaymentTime", String.valueOf(createPaymentDTO.getApplyPaymentTime().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(5);
+                dataList.add(createPaymentDTO.getUserId());
+                dataList.add(createPaymentDTO.getOrderId());
+                dataList.add(paymentId);
+                dataList.add(local.get().format(createPaymentDTO.getPaymentAmount()));
+                dataList.add(String.valueOf(createPaymentDTO.getApplyPaymentTime().getTime()));
+                return dataList;
             }
 
             @Override

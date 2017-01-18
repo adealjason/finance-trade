@@ -1,6 +1,6 @@
 package org.github.finance.mall.account.impl;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -19,7 +19,7 @@ import org.github.finance.mall.share.account.dto.UserRegisterDTO;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,14 +46,14 @@ public class UserAccountService implements IUserAccountService {
         final String userId = userService.saveUser(accountPassportDomain);
         userAccountLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("userId", userId);
-                dataMap.put("userName", userRegisterDTO.getUserName());
-                dataMap.put("userPhone", userRegisterDTO.getUserPhone());
-                dataMap.put("logInName", userRegisterDTO.getLogInName());
-                dataMap.put("registerDate", String.valueOf(DateTime.now().toDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(5);
+                dataList.add(userId);
+                dataList.add(userRegisterDTO.getUserName());
+                dataList.add(userRegisterDTO.getUserPhone());
+                dataList.add(userRegisterDTO.getLogInName());
+                dataList.add(String.valueOf(DateTime.now().toDate().getTime()));
+                return dataList;
             }
 
             @Override
@@ -71,12 +71,12 @@ public class UserAccountService implements IUserAccountService {
 
         userAccountLogEventCollector.collectData(new DataCollectorProvider() {
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("logInName", userLogIn.getLogInName());
-                dataMap.put("isLogIn", String.valueOf(isLogIn));
-                dataMap.put("logInDate", String.valueOf(DateTime.now().toDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(3);
+                dataList.add(userLogIn.getLogInName());
+                dataList.add(String.valueOf(isLogIn));
+                dataList.add(String.valueOf(DateTime.now().toDate().getTime()));
+                return dataList;
             }
 
             @Override
@@ -94,12 +94,12 @@ public class UserAccountService implements IUserAccountService {
         userAccountLogEventCollector.collectData(new DataCollectorProvider() {
 
             @Override
-            public Map<String, String> getMetaData() {
-                Map<String, String> dataMap = Maps.newHashMap();
-                dataMap.put("logInName", logOut.getLogInName());
-                dataMap.put("isLogOut", String.valueOf(isLogOut));
-                dataMap.put("logOutDate", String.valueOf(DateTime.now().toDate().getTime()));
-                return dataMap;
+            public List<String> getMetaData() {
+                List<String> dataList = Lists.newArrayListWithCapacity(3);
+                dataList.add(logOut.getLogInName());
+                dataList.add(String.valueOf(isLogOut));
+                dataList.add(String.valueOf(DateTime.now().toDate().getTime()));
+                return dataList;
             }
 
             @Override

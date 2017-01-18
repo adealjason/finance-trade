@@ -1,6 +1,6 @@
 package org.github.finance.mall.order.impl;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -21,7 +21,7 @@ import org.github.finance.mall.share.storeHouse.dto.PreSaleDTO;
 import org.github.finance.mall.storehouse.IStoreHourseService;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 /**
  * @author ligaofeng 2017年1月15日 下午2:11:03
@@ -59,12 +59,12 @@ public class OrderService implements IOrderService {
             orderLogEventCollector.collectData(new DataCollectorProvider() {
 
                 @Override
-                public Map<String, String> getMetaData() {
-                    Map<String, String> dataMap = Maps.newHashMap();
-                    dataMap.put("userId", createOrderDTO.getUserId());
-                    dataMap.put("orderId", orderId);
-                    dataMap.put("applyPurchaseDate", String.valueOf(createOrderDTO.getApplyPurchaseDate().getTime()));
-                    return dataMap;
+                public List<String> getMetaData() {
+                    List<String> dataList = Lists.newArrayListWithCapacity(3);
+                    dataList.add(createOrderDTO.getUserId());
+                    dataList.add(orderId);
+                    dataList.add(String.valueOf(createOrderDTO.getApplyPurchaseDate().getTime()));
+                    return dataList;
                 }
 
                 @Override
