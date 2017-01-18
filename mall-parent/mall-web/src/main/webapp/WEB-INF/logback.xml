@@ -189,7 +189,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
@@ -206,7 +206,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
@@ -223,7 +223,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
@@ -240,7 +240,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
@@ -257,7 +257,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
@@ -274,7 +274,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
@@ -291,7 +291,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
@@ -308,7 +308,7 @@
             <maxHistory>3</maxHistory>
         </rollingPolicy>
         <encoder charset="UTF-8">
-            <pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     
