@@ -1,5 +1,6 @@
 package org.github.finance.mall.order.impl;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -32,20 +33,29 @@ import com.google.common.collect.Lists;
 public class OrderService implements IOrderService {
 
     @Resource
-    private IOrderRequestService orderRequestService;
+    private IOrderRequestService                    orderRequestService;
     @Resource
-    private IStoreHourseService  storeHourseService;
+    private IStoreHourseService                     storeHourseService;
     @Resource
-    private IPaymentService      paymentService;
+    private IPaymentService                         paymentService;
     @Resource
-    private IExpressService      expressService;
+    private IExpressService                         expressService;
     @Resource(name = "orderLogEventCollector")
-    private DataCollector        orderLogEventCollector;
+    private DataCollector                           orderLogEventCollector;
+
+    private static final ThreadLocal<DecimalFormat> local = new ThreadLocal<DecimalFormat>() {
+
+                                                              @Override
+                                                              protected DecimalFormat initialValue() {
+                                                                  super.initialValue();
+                                                                  return new DecimalFormat("#.00");
+                                                              }
+                                                          };
 
     @Override
     public String createOrder(final CreateOrderDTO createOrderDTO) throws MallOrderException {
         try {
-            OrderDomain orderDomain = OrderDomainHelper.toOrderDomain(createOrderDTO);
+            final OrderDomain orderDomain = OrderDomainHelper.toOrderDomain(createOrderDTO);
             //创建订单
             orderDomain.setOderStatus(OrderStatusEnum.NEW);
             orderRequestService.saveOrderRequest(orderDomain);
@@ -68,9 +78,11 @@ public class OrderService implements IOrderService {
 
                 @Override
                 public List<String> getMetaData() {
-                    List<String> dataList = Lists.newArrayListWithCapacity(3);
+                    List<String> dataList = Lists.newArrayListWithCapacity(5);
                     dataList.add(createOrderDTO.getUserId());
                     dataList.add(orderId);
+                    dataList.add(local.get().format(orderDomain.getOrderAmout()));
+                    dataList.add(String.valueOf(orderDomain.getOrderProductSize()));
                     dataList.add(String.valueOf(createOrderDTO.getApplyPurchaseDate().getTime()));
                     return dataList;
                 }
