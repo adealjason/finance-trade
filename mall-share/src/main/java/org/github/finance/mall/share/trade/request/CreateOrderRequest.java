@@ -26,7 +26,8 @@ public class CreateOrderRequest implements Serializable {
 
     private String                zipCode;
 
-    private String                expressPrivoderId;
+    //快递提供商
+    private String                expressProviderId;
 
     private Date                  applyPurchaseDate;
 

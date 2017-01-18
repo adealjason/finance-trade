@@ -6,12 +6,14 @@ import javax.annotation.Resource;
 
 import org.github.finance.common.logevent.DataCollector;
 import org.github.finance.common.logevent.DataCollector.DataCollectorProvider;
+import org.github.finance.mall.express.IExpressService;
 import org.github.finance.mall.order.IOrderService;
 import org.github.finance.mall.order.domain.OrderDomain;
 import org.github.finance.mall.order.domain.helper.OrderDomainHelper;
 import org.github.finance.mall.order.exception.MallOrderException;
 import org.github.finance.mall.order.service.IOrderRequestService;
 import org.github.finance.mall.payment.IPaymentService;
+import org.github.finance.mall.share.express.dto.CreateExpressDTO;
 import org.github.finance.mall.share.order.constance.OrderLogEvent;
 import org.github.finance.mall.share.order.constance.OrderStatusEnum;
 import org.github.finance.mall.share.order.dto.CreateOrderDTO;
@@ -35,6 +37,8 @@ public class OrderService implements IOrderService {
     private IStoreHourseService  storeHourseService;
     @Resource
     private IPaymentService      paymentService;
+    @Resource
+    private IExpressService      expressService;
     @Resource(name = "orderLogEventCollector")
     private DataCollector        orderLogEventCollector;
 
@@ -55,6 +59,10 @@ public class OrderService implements IOrderService {
             //创建待支付流水
             CreatePaymentDTO createPaymentDTO = this.createPaymentDTO(createOrderDTO, orderId);
             paymentService.createPayment(createPaymentDTO);
+
+            //产生待发送快递订单
+            CreateExpressDTO createExpressDTO = this.createExpressDTO(createOrderDTO, orderId);
+            expressService.createExpress(createExpressDTO);
 
             orderLogEventCollector.collectData(new DataCollectorProvider() {
 
@@ -77,6 +85,18 @@ public class OrderService implements IOrderService {
         } catch (Exception e) {
             throw new MallOrderException(e);
         }
+    }
+
+    private CreateExpressDTO createExpressDTO(CreateOrderDTO createOrderDTO, String orderId) {
+        CreateExpressDTO createExpressDTO = new CreateExpressDTO();
+        createExpressDTO.setAddress(createOrderDTO.getAddress());
+        createExpressDTO.setAddressee(createOrderDTO.getAddressee());
+        createExpressDTO.setAddresseePhone(createOrderDTO.getAddresseePhone());
+        createExpressDTO.setExpressProviderId(createOrderDTO.getExpressProviderId());
+        createExpressDTO.setOrderId(orderId);
+        createExpressDTO.setUserId(createOrderDTO.getUserId());
+        createExpressDTO.setZipCode(createOrderDTO.getZipCode());
+        return createExpressDTO;
     }
 
     private CreatePaymentDTO createPaymentDTO(CreateOrderDTO createOrderDTO, String orderId) {

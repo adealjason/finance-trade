@@ -29,9 +29,10 @@ public class CreateOrderDTO implements Serializable {
 
     private String                zipCode;
 
-    private String                expressPrivoderId;
-
     private Date                  applyPurchaseDate;
+
+    //快递提供商
+    private String                expressProviderId;
 
     private List<OrderProductDTO> orderProductDTOList;
 

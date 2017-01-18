@@ -16,18 +16,20 @@ import lombok.Data;
 @Data
 public class OrderDomain {
 
+    private String                   userId;
+
     private String                   orderId;
 
     private int                      orderProductSize;
 
     private BigDecimal               orderAmout;
 
-    private String                   expressAmount;
-
-    private String                   currency;
-
     private OrderStatusEnum          oderStatus;
 
+    //快递费
+    private BigDecimal               expressAmount;
+
+    //快递发出时间
     private Date                     outTime;
 
     private List<OrderProductDomain> orderProductDomainList;

@@ -53,9 +53,9 @@ public class CreateOrder implements Runnable {
         createOrderRequest.setAddressee(dataMap.get("name"));
         createOrderRequest.setAddresseePhone(dataMap.get("tel"));
         createOrderRequest.setApplyPurchaseDate(DateTime.now().toDate());
-        createOrderRequest.setExpressPrivoderId("YUNDA");
         createOrderRequest.setUserId(dataMap.get("userId"));
         createOrderRequest.setZipCode(dataMap.get("zipCode"));
+        createOrderRequest.setExpressProviderId("YUNDA");
         List<OrderProductDTO> orderProductDTOList = Lists.newArrayList();
         orderProductDTOList.add(this.generateApple6s());
         createOrderRequest.setOrderProductDTOList(orderProductDTOList);

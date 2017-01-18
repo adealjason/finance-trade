@@ -33,7 +33,7 @@ public class ExpressService implements IExpressService {
     public void createExpress(final CreateExpressDTO createExpressDTO) throws MallExpressException {
         log.info("--->will create express:{}", createExpressDTO);
         ExpressDomain expressDomain = ExpressDomainHelper.toExpressDomain(createExpressDTO);
-
+        log.info("--->create express:{}", expressDomain);
         expressLogEventCollector.collectData(new DataCollectorProvider() {
 
             @Override
