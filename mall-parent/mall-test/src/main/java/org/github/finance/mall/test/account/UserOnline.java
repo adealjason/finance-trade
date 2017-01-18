@@ -26,7 +26,7 @@ public class UserOnline implements Runnable {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(1 * 1000l);
+                Thread.sleep(30 * 1000l);
                 UserLogInDTO userLogInDTO = this.generateUserLogInDTO();
                 userAccountService.logIn(userLogInDTO);
                 LogOutDTO logOut = this.generateLogOutDTO();
