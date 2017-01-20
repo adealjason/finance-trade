@@ -30,7 +30,7 @@ public class KafkaSpout extends BaseRichSpout {
 
     private static final long             serialVersionUID = -4011592632161594208L;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void open(Map stormConf, TopologyContext context, SpoutOutputCollector collector) {
         Properties props = (Properties) stormConf.get("kafka.Props");
