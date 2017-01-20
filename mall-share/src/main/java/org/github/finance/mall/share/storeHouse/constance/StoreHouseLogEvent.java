@@ -7,5 +7,5 @@ public enum StoreHouseLogEvent {
 
     PRE_SALE,
 
-    SOLE,
+    SOLD,
 }

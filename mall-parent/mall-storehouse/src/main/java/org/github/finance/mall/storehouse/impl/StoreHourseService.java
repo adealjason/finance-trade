@@ -77,7 +77,7 @@ public class StoreHourseService implements IStoreHourseService {
 
             @Override
             public String getLogEvent() {
-                return StoreHouseLogEvent.SOLE.name();
+                return StoreHouseLogEvent.SOLD.name();
             }
         });
     }
