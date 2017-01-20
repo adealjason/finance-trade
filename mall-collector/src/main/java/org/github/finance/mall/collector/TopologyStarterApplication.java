@@ -1,7 +1,5 @@
 package org.github.finance.mall.collector;
 
-import java.util.Properties;
-
 import org.github.finance.mall.collector.spout.KafkaSpout;
 
 import backtype.storm.Config;
@@ -24,27 +22,20 @@ public class TopologyStarterApplication {
         Config conf = new Config();
         Config.setNumWorkers(conf, 3);
         conf.setDebug(true);
-        conf.put("kafka.consumer.timeout", 10 * 1000);
-        conf.put("kafka.Props", getKafkaProps());
+        conf.put("kafka.consumer.timeout", "10000");
         conf.put("kafka.topics", "flume-20170101");
+        conf.put("bootstrap.servers", kafkaCluster);
+        //设置consumer group name,必须设置
+        conf.put("group.id", consumerGroupId);
+        //设置自动提交为false 采用手动提交
+        conf.put("enable.auto.commit", "false");
+        //设置key以及value的解析（反序列）类
+        conf.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        conf.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        //设置心跳时间
+        conf.put("session.timeout.ms", "30000");
 
         StormSubmitter.submitTopology(TopologyDefinition.topologyName, conf, builder.createTopology());
-    }
-
-    private static Properties getKafkaProps() {
-        Properties props = new Properties();
-        //brokerServer(kafka)ip地址,不需要把所有集群中的地址都写上，可是一个或一部分
-        props.put("bootstrap.servers", kafkaCluster);
-        //设置consumer group name,必须设置
-        props.put("group.id", consumerGroupId);
-        //设置自动提交为false 采用手动提交
-        props.put("enable.auto.commit", "false");
-        //设置key以及value的解析（反序列）类
-        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        //设置心跳时间
-        props.put("session.timeout.ms", "30000");
-        return props;
     }
 
 }

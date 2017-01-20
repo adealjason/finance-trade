@@ -32,6 +32,7 @@
 			<groupId>com.alibaba.jstorm</groupId>
 			<artifactId>jstorm-core</artifactId>
 			<version>${jstorm.core.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
