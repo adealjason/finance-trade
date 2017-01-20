@@ -20,7 +20,8 @@ public class TopologyStarterApplication {
         builder.setSpout(TopologyDefinition.kafkaSpoutName, new KafkaSpout(), 3);
 
         Config conf = new Config();
-        Config.setNumWorkers(conf, 3);
+        //3个worker进程
+        //Config.setNumWorkers(conf, 3);
         conf.setDebug(true);
         conf.put("kafka.consumer.timeout", "10000");
         conf.put("kafka.topics", "flume-20170101");
