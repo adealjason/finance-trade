@@ -1,5 +1,6 @@
 package org.github.finance.mall.collector;
 
+import org.github.finance.mall.collector.bolt.register.AssembleUserInfoBolt;
 import org.github.finance.mall.collector.spout.KafkaSpout;
 
 import backtype.storm.Config;
@@ -18,7 +19,24 @@ public class TopologyStarterApplication {
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout(TopologyDefinition.kafkaSpoutName, new KafkaSpout(), 3);
+        //register事件的拓扑
+        buildRegisterTopology(builder);
 
+        Config conf = getConfig();
+        StormSubmitter.submitTopology(TopologyDefinition.topologyName, conf, builder.createTopology());
+    }
+
+    /**
+     * register事件的拓扑
+     * 
+     * @param builder
+     */
+    private static void buildRegisterTopology(TopologyBuilder builder) {
+        builder.setBolt(TopologyDefinition.assembleUserinfoBolt, new AssembleUserInfoBolt(), 2)
+                .shuffleGrouping(TopologyDefinition.topologyName, CollectEvent.REGISTER.getStreamId());
+    }
+
+    private static Config getConfig() {
         Config conf = new Config();
         //3个worker进程
         //Config.setNumWorkers(conf, 3);
@@ -35,8 +53,7 @@ public class TopologyStarterApplication {
         conf.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         //设置心跳时间
         conf.put("session.timeout.ms", "30000");
-
-        StormSubmitter.submitTopology(TopologyDefinition.topologyName, conf, builder.createTopology());
+        return conf;
     }
 
 }

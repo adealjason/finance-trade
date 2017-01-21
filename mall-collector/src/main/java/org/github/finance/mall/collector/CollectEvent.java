@@ -1,5 +1,9 @@
 package org.github.finance.mall.collector;
 
+import org.github.finance.mall.collector.logevent.convert.MallRegisterEventConvert;
+
+import lombok.Getter;
+
 /**
  * 收集事件列表
  * 
@@ -7,25 +11,35 @@ package org.github.finance.mall.collector;
  */
 public enum CollectEvent {
 
-    REGISTER,
+    REGISTER("register-stream", MallRegisterEventConvert.class),
 
-    LOGIN,
+    LOGIN("", null),
 
-    LOGOUT,
+    LOGOUT("", null),
 
-    BIND_CARD,
+    BIND_CARD("", null),
 
-    UNBIND,
+    UNBIND("", null),
 
-    CREATE_EXPRESS,
+    CREATE_EXPRESS("", null),
 
-    CREATE_ORDER,
+    CREATE_ORDER("", null),
 
-    CREATE_PAYMENT,
+    CREATE_PAYMENT("", null),
 
-    PRE_SALE,
+    PRE_SALE("", null),
 
-    SOLD;
+    SOLD("", null);
+
+    @Getter
+    private String streamId;
+    @Getter
+    private Class  eventConvert;
+
+    private CollectEvent(String streamId, Class eventConvert) {
+        this.streamId = streamId;
+        this.eventConvert = eventConvert;
+    }
 
     /**
      * 是否包含某个事件

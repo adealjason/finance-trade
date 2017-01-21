@@ -8,12 +8,11 @@ public class TopologyDefinition {
     private TopologyDefinition() {
     }
 
-    public static final String topologyName    = "mall-collector-topology";
+    public static final String topologyName         = "mall-collector-topology";
 
-    public static final String kafkaSpoutName  = "mall-collector-kafka-spout";
+    public static final String kafkaSpoutName       = "mall-collector-kafka-spout";
 
-    public static final String accountStreamId = "account-stream-id";
-
-    public static final String orderStreamId   = "order-stream-id";
+    //register
+    public static final String assembleUserinfoBolt = "assemble-userinfo-bolt";
 
 }

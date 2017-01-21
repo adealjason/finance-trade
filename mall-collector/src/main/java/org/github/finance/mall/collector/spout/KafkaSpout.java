@@ -9,11 +9,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.github.finance.mall.collector.BaseLogEvent;
+import org.github.finance.mall.collector.CollectEvent;
+import org.github.finance.mall.collector.ILogEventConvert;
+import org.github.finance.mall.collector.logevent.LogEventUtils;
+import org.github.finance.mall.collector.logevent.MallRegisterEvent;
+
+import com.alibaba.druid.util.StringUtils;
 
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichSpout;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,17 +32,16 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaSpout extends BaseRichSpout {
 
     private final AtomicBoolean           closed           = new AtomicBoolean(false);
-
     private KafkaConsumer<String, String> consumer;
-
+    private SpoutOutputCollector          collector;
     private long                          kafkaConsumerTimeOut;
-
     private static final long             serialVersionUID = -4011592632161594208L;
 
     @SuppressWarnings({ "rawtypes" })
     @Override
     public void open(Map stormConf, TopologyContext context, SpoutOutputCollector collector) {
         log.info("stormConf:{}", stormConf);
+        this.collector = collector;
         kafkaConsumerTimeOut = Long.valueOf(String.valueOf(stormConf.get("kafka.consumer.timeout")));
         String topicStr = String.valueOf(stormConf.get("kafka.topics"));
         List<String> topics = Arrays.asList(topicStr.split(","));
@@ -66,11 +74,6 @@ public class KafkaSpout extends BaseRichSpout {
     }
 
     @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
-
-    }
-
-    @Override
     public void nextTuple() {
         while (!closed.get()) {
             try {
@@ -85,9 +88,37 @@ public class KafkaSpout extends BaseRichSpout {
     }
 
     private void handleRecords(ConsumerRecords<String, String> records) {
-        for (ConsumerRecord<String, String> recored : records) {
-            log.info("offset:{},key:{},value:{}", recored.offset(), recored.key(), recored.value());
+        for (ConsumerRecord<String, String> record : records) {
+            this.handleRecord(record);
         }
+    }
+
+    private void handleRecord(ConsumerRecord<String, String> record) {
+        if (record == null || StringUtils.isEmpty(record.value())) {
+            return;
+        }
+        String value = record.value();
+        String[] logEvent = value.split(":");
+        //格式不正确
+        if (logEvent.length != 2) {
+            return;
+        }
+        String streamId = LogEventUtils.getStreamId(logEvent[0]);
+        if (StringUtils.isEmpty(streamId)) {
+            return;
+        }
+        ILogEventConvert logeventConvert = LogEventUtils.getLogEventConvert(logEvent[0]);
+        if (logeventConvert == null) {
+            return;
+        }
+        BaseLogEvent baseLogEvent = logeventConvert.convert(value);
+        collector.emit(streamId, new Values(logEvent[0], baseLogEvent));
+    }
+
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declareStream(CollectEvent.REGISTER.getStreamId(),
+                new Fields(CollectEvent.REGISTER.name(), MallRegisterEvent.class.getSimpleName()));
     }
 
     @Override
