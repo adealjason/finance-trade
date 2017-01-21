@@ -22,4 +22,6 @@ public class MallRegisterEvent extends BaseLogEvent {
 
     private String            registerDate;
 
+    private String            position;
+
 }
