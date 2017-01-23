@@ -18,7 +18,7 @@ public class TopologyStarterApplication {
 
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
-        builder.setSpout(TopologyDefinition.kafkaSpoutName, new KafkaSpout(), 3);
+        builder.setSpout(TopologyDefinition.kafkaSpoutName, new KafkaSpout(), 1);
         //register事件的拓扑
         buildRegisterTopology(builder);
 
@@ -33,7 +33,7 @@ public class TopologyStarterApplication {
      */
     private static void buildRegisterTopology(TopologyBuilder builder) {
         builder.setBolt(TopologyDefinition.assembleUserinfoBolt, new AssembleUserInfoBolt(), 2)
-                .shuffleGrouping(TopologyDefinition.topologyName, CollectEvent.REGISTER.getStreamId());
+                .shuffleGrouping(TopologyDefinition.kafkaSpoutName, CollectEvent.REGISTER.getStreamId());
     }
 
     private static Config getConfig() {

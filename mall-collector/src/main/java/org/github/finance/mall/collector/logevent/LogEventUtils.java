@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.github.finance.mall.collector.CollectEvent;
 import org.github.finance.mall.collector.ILogEventConvert;
 
+import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Maps;
 
 /**
@@ -30,7 +31,7 @@ public class LogEventUtils {
      * @param logEvent
      * @return
      */
-    public synchronized static ILogEventConvert getLogEventConvert(String logEvent) {
+    public static ILogEventConvert getLogEventConvert(String logEvent) {
         if (logEventConvertors.isEmpty() || !logEventConvertors.containsKey(logEvent)) {
             return null;
         }
@@ -40,18 +41,19 @@ public class LogEventUtils {
     private synchronized static void initConvertors() {
         for (CollectEvent an : CollectEvent.values()) {
             if (an.getEventConvert() == null) {
-                throw new RuntimeException("--->请指定" + an.name() + "的转换器");
+                continue;
             }
             try {
                 ILogEventConvert instance = (ILogEventConvert) an.getEventConvert().newInstance();
                 logEventConvertors.put(an.name(), instance);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Log.error(e.getMessage(), e);
+                continue;
             }
         }
     }
 
-    private static void initStreams() {
+    private synchronized static void initStreams() {
         for (CollectEvent an : CollectEvent.values()) {
             if (StringUtils.isNotEmpty(an.getStreamId())) {
                 logEventSteams.put(an.name(), an.getStreamId());

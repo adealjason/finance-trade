@@ -48,6 +48,7 @@ public class KafkaSpout extends BaseRichSpout {
         Properties props = this.getKafkaProps(stormConf);
         consumer = new KafkaConsumer<>(props);
         consumer.subscribe(topics);
+        log.info("--->kafka consumer started...");
     }
 
     @SuppressWarnings("rawtypes")
@@ -94,6 +95,7 @@ public class KafkaSpout extends BaseRichSpout {
     }
 
     private void handleRecord(ConsumerRecord<String, String> record) {
+        log.info("--->start to handle record:{}", record);
         if (record == null || StringUtils.isEmpty(record.value())) {
             return;
         }
@@ -112,7 +114,9 @@ public class KafkaSpout extends BaseRichSpout {
             return;
         }
         BaseLogEvent baseLogEvent = logeventConvert.convert(value);
+        log.info("--->convert baseLogEvent:{}", baseLogEvent);
         collector.emit(streamId, new Values(logEvent[0], baseLogEvent));
+        log.info("--->emit event:{}", baseLogEvent);
     }
 
     @Override
