@@ -35,6 +35,7 @@ public class AssembleUserInfoBolt extends BaseBasicBolt {
         mallRegisterEvent.setCarrier(jsonObject.getString("carrier"));
         mallRegisterEvent.setCatName(jsonObject.getString("catName"));
         mallRegisterEvent.setProvince(jsonObject.getString("province"));
+        log.info("--->start to emit mallRegisterEvent:{}", mallRegisterEvent);
         //emit event
         collector.emit(new Values(mallRegisterEvent.getProvince(), mallRegisterEvent.getCatName(), mallRegisterEvent));
     }
