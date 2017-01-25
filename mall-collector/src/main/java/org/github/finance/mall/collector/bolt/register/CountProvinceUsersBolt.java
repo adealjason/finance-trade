@@ -1,5 +1,6 @@
 package org.github.finance.mall.collector.bolt.register;
 
+import org.github.finance.mall.collector.RedisCacheDefinition;
 import org.github.finance.mall.collector.areaDomain.ProvinceDomain;
 import org.github.finance.mall.collector.utils.AreaParseor;
 
@@ -8,7 +9,9 @@ import com.alibaba.fastjson.JSON;
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
+import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -26,12 +29,17 @@ public class CountProvinceUsersBolt extends BaseBasicBolt {
         log.info("--->start to count province users:{}", JSON.toJSONString(input));
         String provinceName = input.getString(0);
         ProvinceDomain provinceDomain = AreaParseor.searchByname(provinceName);
-        log.info("--->provinceDomain:{}", provinceDomain);
+        String fullCode = RedisCacheDefinition.unkown;
+        if (provinceDomain != null) {
+            fullCode = provinceDomain.getFullCode();
+        }
+        String provinceUsersCntKey = RedisCacheDefinition.provinceUsersCntPrefix.concat(".").concat(fullCode);
+        collector.emit(new Values(provinceUsersCntKey, 1));
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-
+        declarer.declare(new Fields("provinceUsers", "cnt"));
     }
 
 }
