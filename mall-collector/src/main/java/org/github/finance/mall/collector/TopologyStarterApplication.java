@@ -1,11 +1,14 @@
 package org.github.finance.mall.collector;
 
 import org.github.finance.mall.collector.bolt.register.AssembleUserInfoBolt;
+import org.github.finance.mall.collector.bolt.register.CountCatNameUsersBolt;
+import org.github.finance.mall.collector.bolt.register.CountProvinceUsersBolt;
 import org.github.finance.mall.collector.spout.KafkaSpout;
 
 import backtype.storm.Config;
 import backtype.storm.StormSubmitter;
 import backtype.storm.topology.TopologyBuilder;
+import backtype.storm.tuple.Fields;
 
 /**
  * @author ligaofeng 2017年1月19日 下午3:15:22
@@ -34,6 +37,10 @@ public class TopologyStarterApplication {
     private static void buildRegisterTopology(TopologyBuilder builder) {
         builder.setBolt(TopologyDefinition.assembleUserinfoBolt, new AssembleUserInfoBolt(), 2)
                 .shuffleGrouping(TopologyDefinition.kafkaSpoutName, CollectEvent.REGISTER.getStreamId());
+        builder.setBolt(TopologyDefinition.countProvinceUsersBolt, new CountProvinceUsersBolt(), 2)
+                .fieldsGrouping(TopologyDefinition.assembleUserinfoBolt, new Fields("province"));
+        builder.setBolt(TopologyDefinition.countCatNameUsersBolt, new CountCatNameUsersBolt(), 2)
+                .fieldsGrouping(TopologyDefinition.assembleUserinfoBolt, new Fields("catName"));
     }
 
     private static Config getConfig() {

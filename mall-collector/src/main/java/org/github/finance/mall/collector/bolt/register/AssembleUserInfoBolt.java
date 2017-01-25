@@ -9,7 +9,9 @@ import com.alibaba.fastjson.JSONObject;
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
+import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,6 +35,8 @@ public class AssembleUserInfoBolt extends BaseBasicBolt {
         mallRegisterEvent.setCarrier(jsonObject.getString("carrier"));
         mallRegisterEvent.setCatName(jsonObject.getString("catName"));
         mallRegisterEvent.setProvince(jsonObject.getString("province"));
+        //emit event
+        collector.emit(new Values(mallRegisterEvent.getProvince(), mallRegisterEvent.getCatName(), mallRegisterEvent));
     }
 
     private String getPsition(String mobile) {
@@ -43,7 +47,7 @@ public class AssembleUserInfoBolt extends BaseBasicBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-
+        declarer.declare(new Fields("province", "catName", "mallRegisterEvent"));
     }
 
 }
