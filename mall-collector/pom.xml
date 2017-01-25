@@ -26,6 +26,7 @@
 		<joda.time.version>2.9.5</joda.time.version>
 		<kafka.clients>0.10.1.0</kafka.clients>
 		<jsoup.version>1.9.2</jsoup.version>
+		<dom4j.version>1.6.1</dom4j.version>
 	</properties>
 
 	<dependencies>
@@ -99,6 +100,11 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>${dom4j.version}</version>
 		</dependency>
 	</dependencies>
 
