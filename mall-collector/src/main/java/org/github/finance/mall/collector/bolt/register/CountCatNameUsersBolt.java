@@ -20,7 +20,7 @@ public class CountCatNameUsersBolt extends BaseBasicBolt {
 
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
-        log.info("--21--input:{}", JSON.toJSONString(input));
+        log.info("--->start to count catName users:{}", JSON.toJSONString(input));
     }
 
     @Override

@@ -18,9 +18,12 @@ import org.github.finance.mall.collector.areaDomain.RegionDomain;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author ligaofeng 2017年1月25日 下午6:46:01
  */
+@Slf4j
 public class AreaParseor {
 
     private AreaParseor() {
@@ -74,7 +77,7 @@ public class AreaParseor {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 

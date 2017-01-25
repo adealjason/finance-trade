@@ -1,5 +1,8 @@
 package org.github.finance.mall.collector.bolt.register;
 
+import org.github.finance.mall.collector.areaDomain.ProvinceDomain;
+import org.github.finance.mall.collector.utils.AreaParseor;
+
 import com.alibaba.fastjson.JSON;
 
 import backtype.storm.topology.BasicOutputCollector;
@@ -20,7 +23,10 @@ public class CountProvinceUsersBolt extends BaseBasicBolt {
 
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
-        log.info("--23--input:{}", JSON.toJSONString(input));
+        log.info("--->start to count province users:{}", JSON.toJSONString(input));
+        String provinceName = input.getString(0);
+        ProvinceDomain provinceDomain = AreaParseor.searchByname(provinceName);
+        log.info("--->provinceDomain:{}", provinceDomain);
     }
 
     @Override
