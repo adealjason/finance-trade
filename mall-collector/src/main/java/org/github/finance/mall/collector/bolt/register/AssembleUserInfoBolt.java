@@ -3,6 +3,9 @@ package org.github.finance.mall.collector.bolt.register;
 import org.github.finance.mall.collector.logevent.MallRegisterEvent;
 import org.github.finance.mall.collector.utils.HttpUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import backtype.storm.topology.BasicOutputCollector;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
@@ -24,7 +27,12 @@ public class AssembleUserInfoBolt extends BaseBasicBolt {
         String collectEvent = input.getString(0);
         MallRegisterEvent mallRegisterEvent = (MallRegisterEvent) input.getValue(1);
         log.info("--->deal event {},start to assemble user info:{}", collectEvent, mallRegisterEvent);
-        log.info(this.getPsition(mallRegisterEvent.getUserPhone()));
+        String getZoneResult = this.getPsition(mallRegisterEvent.getUserPhone());
+        String responseJson = getZoneResult.split("=")[1].trim();
+        JSONObject jsonObject = (JSONObject) JSON.parse(responseJson);
+        mallRegisterEvent.setCarrier(jsonObject.getString("carrier"));
+        mallRegisterEvent.setCatName(jsonObject.getString("catName"));
+        mallRegisterEvent.setProvince(jsonObject.getString("province"));
     }
 
     private String getPsition(String mobile) {

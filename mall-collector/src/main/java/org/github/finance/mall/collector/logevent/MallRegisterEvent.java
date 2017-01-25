@@ -22,6 +22,13 @@ public class MallRegisterEvent extends BaseLogEvent {
 
     private String            registerDate;
 
-    private String            position;
+    //手机地点:河南
+    private String            province;
+
+    //手机运营商:中国移动
+    private String            catName;
+
+    //运营商省份:河南移动
+    private String            carrier;
 
 }
