@@ -1,5 +1,6 @@
 package org.github.finance.mall.collector;
 
+import org.github.finance.mall.collector.bolt.order.AssembleCreateOrderinfoBolt;
 import org.github.finance.mall.collector.bolt.register.AssembleUserInfoBolt;
 import org.github.finance.mall.collector.bolt.register.CacheCatNameUsersBolt;
 import org.github.finance.mall.collector.bolt.register.CacheProvinceUsersBolt;
@@ -26,9 +27,16 @@ public class TopologyStarterApplication {
         builder.setSpout(TopologyDefinition.kafkaSpoutName, new KafkaSpout(), 1);
         //register事件的拓扑
         buildRegisterTopology(builder);
+        //createOrder事件的拓扑
+        buildCreateOrderTopology(builder);
 
         Config conf = getConfig();
         StormSubmitter.submitTopology(TopologyDefinition.topologyName, conf, builder.createTopology());
+    }
+
+    private static void buildCreateOrderTopology(TopologyBuilder builder) {
+        builder.setBolt(TopologyDefinition.assembleCreateOrderinfoBolt, new AssembleCreateOrderinfoBolt(), 2)
+                .shuffleGrouping(TopologyDefinition.kafkaSpoutName, CollectEvent.CREATE_ORDER.getStreamId());
     }
 
     /**

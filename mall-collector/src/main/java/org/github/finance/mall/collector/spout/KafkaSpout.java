@@ -13,7 +13,6 @@ import org.github.finance.mall.collector.BaseLogEvent;
 import org.github.finance.mall.collector.CollectEvent;
 import org.github.finance.mall.collector.ILogEventConvert;
 import org.github.finance.mall.collector.logevent.LogEventUtils;
-import org.github.finance.mall.collector.logevent.MallRegisterEvent;
 
 import com.alibaba.druid.util.StringUtils;
 
@@ -121,8 +120,11 @@ public class KafkaSpout extends BaseRichSpout {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declareStream(CollectEvent.REGISTER.getStreamId(),
-                new Fields(CollectEvent.REGISTER.name(), MallRegisterEvent.class.getSimpleName()));
+        for (CollectEvent an : CollectEvent.values()) {
+            if (CollectEvent.check(an)) {
+                declarer.declareStream(an.getStreamId(), new Fields(an.name(), an.getEventName()));
+            }
+        }
     }
 
     @Override

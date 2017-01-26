@@ -1,5 +1,9 @@
 package org.github.finance.mall.collector;
 
+import org.apache.commons.lang.StringUtils;
+import org.github.finance.mall.collector.logevent.CreateOrderEvent;
+import org.github.finance.mall.collector.logevent.MallRegisterEvent;
+import org.github.finance.mall.collector.logevent.convert.CreateOrderEventConvert;
 import org.github.finance.mall.collector.logevent.convert.MallRegisterEventConvert;
 
 import lombok.Getter;
@@ -11,34 +15,46 @@ import lombok.Getter;
  */
 public enum CollectEvent {
 
-    REGISTER("register-stream", MallRegisterEventConvert.class),
+    REGISTER("register-stream", MallRegisterEventConvert.class, MallRegisterEvent.class.getSimpleName()),
 
-    LOGIN("", null),
+    LOGIN("", null, null),
 
-    LOGOUT("", null),
+    LOGOUT("", null, null),
 
-    BIND_CARD("", null),
+    BIND_CARD("", null, null),
 
-    UNBIND("", null),
+    UNBIND("", null, null),
 
-    CREATE_EXPRESS("", null),
+    CREATE_EXPRESS("", null, null),
 
-    CREATE_ORDER("", null),
+    CREATE_ORDER("createOrder-stream", CreateOrderEventConvert.class, CreateOrderEvent.class.getSimpleName()),
 
-    CREATE_PAYMENT("", null),
+    CREATE_PAYMENT("", null, null),
 
-    PRE_SALE("", null),
+    PRE_SALE("", null, null),
 
-    SOLD("", null);
+    SOLD("", null, null);
 
     @Getter
     private String streamId;
     @Getter
     private Class  eventConvert;
+    @Getter
+    private String eventName;
 
-    private CollectEvent(String streamId, Class eventConvert) {
+    private CollectEvent(String streamId, Class eventConvert, String eventName) {
         this.streamId = streamId;
         this.eventConvert = eventConvert;
+        this.eventName = eventName;
+    }
+
+    /**
+     * @param an
+     * @return
+     */
+    public static boolean check(CollectEvent an) {
+        return StringUtils.isNotEmpty(an.getStreamId()) && an.getEventConvert() != null
+                && StringUtils.isNotEmpty(an.getEventName());
     }
 
     /**

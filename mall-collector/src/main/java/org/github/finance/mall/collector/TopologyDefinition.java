@@ -8,19 +8,22 @@ public class TopologyDefinition {
     private TopologyDefinition() {
     }
 
-    public static final String topologyName           = "mall-collector-topology";
+    public static final String topologyName                = "mall-collector-topology";
 
-    public static final String kafkaSpoutName         = "mall-collector-kafka-spout";
+    public static final String kafkaSpoutName              = "mall-collector-kafka-spout";
 
     //register
-    public static final String assembleUserinfoBolt   = "assemble-userinfo-bolt";
+    public static final String assembleUserinfoBolt        = "assemble-userinfo-bolt";
 
-    public static final String countProvinceUsersBolt = "count-province-users-bolt";
+    public static final String countProvinceUsersBolt      = "count-province-users-bolt";
 
-    public static final String cacheProvinceUsersBolt = "cache-province-users-bolt";
+    public static final String cacheProvinceUsersBolt      = "cache-province-users-bolt";
 
-    public static final String countCatNameUsersBolt  = "count-catName-users-bolt";
+    public static final String countCatNameUsersBolt       = "count-catName-users-bolt";
 
-    public static final String cacheCatNameUsersBolt  = "cache-catName-users-bolt";
+    public static final String cacheCatNameUsersBolt       = "cache-catName-users-bolt";
+
+    //createOrder
+    public static final String assembleCreateOrderinfoBolt = "assemble-createOrder-userinfo-bolt";
 
 }
