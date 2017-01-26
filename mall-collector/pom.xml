@@ -27,6 +27,7 @@
 		<kafka.clients>0.10.1.0</kafka.clients>
 		<jsoup.version>1.9.2</jsoup.version>
 		<dom4j.version>1.6.1</dom4j.version>
+		<jedis.version>2.1.0</jedis.version>
 	</properties>
 
 	<dependencies>
@@ -35,6 +36,11 @@
 			<artifactId>jstorm-core</artifactId>
 			<version>${jstorm.core.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
