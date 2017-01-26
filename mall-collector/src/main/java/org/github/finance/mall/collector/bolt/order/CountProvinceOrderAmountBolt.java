@@ -39,7 +39,7 @@ public class CountProvinceOrderAmountBolt extends BaseBasicBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("provinceOrderAmountKey", "cnt"));
+        declarer.declare(new Fields("provinceOrderAmountKey", "orderAmount"));
     }
 
 }

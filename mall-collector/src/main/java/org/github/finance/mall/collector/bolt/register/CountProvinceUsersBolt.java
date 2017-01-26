@@ -1,5 +1,7 @@
 package org.github.finance.mall.collector.bolt.register;
 
+import java.math.BigDecimal;
+
 import org.github.finance.mall.collector.RedisCacheDefinition;
 import org.github.finance.mall.collector.areaDomain.ProvinceDomain;
 import org.github.finance.mall.collector.utils.AreaParseor;
@@ -34,7 +36,7 @@ public class CountProvinceUsersBolt extends BaseBasicBolt {
             fullCode = provinceDomain.getFullCode();
         }
         String provinceUsersCntKey = RedisCacheDefinition.provinceUsersCntPrefix.concat(".").concat(fullCode);
-        collector.emit(new Values(provinceUsersCntKey, 1));
+        collector.emit(new Values(provinceUsersCntKey, new BigDecimal(1)));
     }
 
     @Override

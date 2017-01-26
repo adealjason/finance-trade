@@ -1,5 +1,7 @@
 package org.github.finance.mall.collector.bolt.register;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang.StringUtils;
 import org.github.finance.mall.collector.RedisCacheDefinition;
 import org.github.finance.mall.collector.utils.CatNameUtil;
@@ -34,7 +36,7 @@ public class CountCatNameUsersBolt extends BaseBasicBolt {
             catNamekey = tmp;
         }
         String fullCatNameKey = RedisCacheDefinition.catNameUsersCntPrefix.concat(".").concat(catNamekey);
-        collector.emit(new Values(fullCatNameKey, 1));
+        collector.emit(new Values(fullCatNameKey, new BigDecimal(1)));
     }
 
     @Override

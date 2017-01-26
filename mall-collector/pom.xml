@@ -28,6 +28,7 @@
 		<jsoup.version>1.9.2</jsoup.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<jedis.version>2.1.0</jedis.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
@@ -53,14 +54,14 @@
 			<version>${druid.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>${mybatis.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>${mybatis.spring.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>org.slf4j</groupId> -->

@@ -1,5 +1,7 @@
 package org.github.finance.mall.collector.service;
 
+import java.math.BigDecimal;
+
 /**
  * @author ligaofeng 2017年1月26日 下午6:05:15
  */
@@ -11,5 +13,5 @@ public interface IMallCacheService {
      * @param key
      * @param value
      */
-    public void cache(String key, String value);
+    public void cache(String key, BigDecimal value);
 }

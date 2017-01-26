@@ -1,13 +1,15 @@
 package org.github.finance.mall.collector.dao.entity;
 
+import java.math.BigDecimal;
+
 /**
  * @author ligaofeng 2017年1月26日 下午6:04:17
  */
 public class MallCacheEntity {
 
-    private String cacheKey;
+    private String     cacheKey;
 
-    private String cacheValue;
+    private BigDecimal cacheValue;
 
     /**
      * @return
@@ -26,14 +28,14 @@ public class MallCacheEntity {
     /**
      * @return
      */
-    public String getCacheValue() {
+    public BigDecimal getCacheValue() {
         return cacheValue;
     }
 
     /**
      * @param cacheValue
      */
-    public void setCacheValue(String cacheValue) {
-        this.cacheValue = cacheValue == null ? null : cacheValue.trim();
+    public void setCacheValue(BigDecimal cacheValue) {
+        this.cacheValue = cacheValue;
     }
 }
