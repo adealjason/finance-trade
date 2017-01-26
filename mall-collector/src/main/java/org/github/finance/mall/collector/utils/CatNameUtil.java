@@ -17,9 +17,9 @@ public class CatNameUtil {
     private static final Map<String, String> catNames = Maps.newHashMap();
 
     static {
-        catNames.put("电信", "cat.10000");
-        catNames.put("移动", "cat.10086");
-        catNames.put("联通", "cat.10010");
+        catNames.put("电信", "10000");
+        catNames.put("移动", "10086");
+        catNames.put("联通", "10010");
     }
 
     /**

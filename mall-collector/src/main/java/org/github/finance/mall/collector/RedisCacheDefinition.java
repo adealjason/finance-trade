@@ -12,8 +12,8 @@ public class RedisCacheDefinition {
     public static final String unkown                 = "unkown";
 
     //各省份累计用户数
-    public static final String provinceUsersCntPrefix = "province.users.cnt";
+    public static final String provinceUsersCntPrefix = "province.users";
     //各运营商累计用户数
-    public static final String catNameUsersCntPrefix  = "catName.users.cnt";
+    public static final String catNameUsersCntPrefix  = "catName.users";
 
 }
