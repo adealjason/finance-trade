@@ -64,7 +64,6 @@ public class TopologyStarterApplication {
                 .fieldsGrouping(TopologyDefinition.assembleUserinfoBolt, new Fields("catName"));
         builder.setBolt(TopologyDefinition.cacheCatNameUsersBolt, new CacheCatNameUsersBolt(), 2)
                 .fieldsGrouping(TopologyDefinition.countCatNameUsersBolt, new Fields("fullCatNameKey"));
-        ;
     }
 
     private static Config getConfig() {
