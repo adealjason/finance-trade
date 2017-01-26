@@ -1,6 +1,8 @@
 package org.github.finance.mall.collector;
 
 import org.github.finance.mall.collector.bolt.order.AssembleCreateOrderinfoBolt;
+import org.github.finance.mall.collector.bolt.order.CacheProvinceOrderAmountBolt;
+import org.github.finance.mall.collector.bolt.order.CountProvinceOrderAmountBolt;
 import org.github.finance.mall.collector.bolt.register.AssembleUserInfoBolt;
 import org.github.finance.mall.collector.bolt.register.CacheCatNameUsersBolt;
 import org.github.finance.mall.collector.bolt.register.CacheProvinceUsersBolt;
@@ -37,6 +39,11 @@ public class TopologyStarterApplication {
     private static void buildCreateOrderTopology(TopologyBuilder builder) {
         builder.setBolt(TopologyDefinition.assembleCreateOrderinfoBolt, new AssembleCreateOrderinfoBolt(), 2)
                 .shuffleGrouping(TopologyDefinition.kafkaSpoutName, CollectEvent.CREATE_ORDER.getStreamId());
+
+        builder.setBolt(TopologyDefinition.countProvinceOrderAmountBolt, new CountProvinceOrderAmountBolt(), 2)
+                .fieldsGrouping(TopologyDefinition.assembleCreateOrderinfoBolt, new Fields("province"));
+        builder.setBolt(TopologyDefinition.cacheProvinceOrderAmountBolt, new CacheProvinceOrderAmountBolt(), 2)
+                .fieldsGrouping(TopologyDefinition.countProvinceOrderAmountBolt, new Fields("provinceOrderAmountKey"));
     }
 
     /**
@@ -51,12 +58,12 @@ public class TopologyStarterApplication {
         builder.setBolt(TopologyDefinition.countProvinceUsersBolt, new CountProvinceUsersBolt(), 2)
                 .fieldsGrouping(TopologyDefinition.assembleUserinfoBolt, new Fields("province"));
         builder.setBolt(TopologyDefinition.cacheProvinceUsersBolt, new CacheProvinceUsersBolt())
-                .fieldsGrouping(TopologyDefinition.countProvinceUsersBolt, new Fields("provinceUsers"));
+                .fieldsGrouping(TopologyDefinition.countProvinceUsersBolt, new Fields("provinceUsersCntKey"));
 
         builder.setBolt(TopologyDefinition.countCatNameUsersBolt, new CountCatNameUsersBolt(), 2)
                 .fieldsGrouping(TopologyDefinition.assembleUserinfoBolt, new Fields("catName"));
         builder.setBolt(TopologyDefinition.cacheCatNameUsersBolt, new CacheCatNameUsersBolt())
-                .fieldsGrouping(TopologyDefinition.countCatNameUsersBolt, new Fields("catNameUsers"));
+                .fieldsGrouping(TopologyDefinition.countCatNameUsersBolt, new Fields("fullCatNameKey"));
         ;
     }
 

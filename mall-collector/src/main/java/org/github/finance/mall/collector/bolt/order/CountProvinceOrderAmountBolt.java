@@ -1,7 +1,8 @@
-package org.github.finance.mall.collector.bolt.register;
+package org.github.finance.mall.collector.bolt.order;
 
 import org.github.finance.mall.collector.RedisCacheDefinition;
 import org.github.finance.mall.collector.areaDomain.ProvinceDomain;
+import org.github.finance.mall.collector.logevent.CreateOrderEvent;
 import org.github.finance.mall.collector.utils.AreaParseor;
 
 import com.alibaba.fastjson.JSON;
@@ -15,31 +16,30 @@ import backtype.storm.tuple.Values;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 计算各省份人数
- * 
- * @author ligaofeng 2017年1月25日 下午12:41:47
+ * @author ligaofeng 2017年1月26日 下午1:50:13
  */
 @Slf4j
-public class CountProvinceUsersBolt extends BaseBasicBolt {
+public class CountProvinceOrderAmountBolt extends BaseBasicBolt {
 
-    private static final long serialVersionUID = -277673296319075487L;
+    private static final long serialVersionUID = -3655357790078505494L;
 
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
-        log.info("--->start to count province users:{}", JSON.toJSONString(input));
+        log.info("--->count province order amount bolt:{}", JSON.toJSONString(input));
         String provinceName = input.getString(0);
+        CreateOrderEvent createOrderEvent = (CreateOrderEvent) input.getValue(1);
         ProvinceDomain provinceDomain = AreaParseor.searchByname(provinceName);
         String fullCode = RedisCacheDefinition.unkown;
         if (provinceDomain != null) {
             fullCode = provinceDomain.getFullCode();
         }
-        String provinceUsersCntKey = RedisCacheDefinition.provinceUsersCntPrefix.concat(".").concat(fullCode);
-        collector.emit(new Values(provinceUsersCntKey, 1));
+        String provinceOrderAmountKey = RedisCacheDefinition.provinceOrderAmountPrefix.concat(".").concat(fullCode);
+        collector.emit(new Values(provinceOrderAmountKey, createOrderEvent.getOrderAmount()));
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("provinceUsersCntKey", "cnt"));
+        declarer.declare(new Fields("provinceOrderAmountKey", "cnt"));
     }
 
 }

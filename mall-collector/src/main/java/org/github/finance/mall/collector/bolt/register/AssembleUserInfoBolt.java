@@ -1,9 +1,8 @@
 package org.github.finance.mall.collector.bolt.register;
 
 import org.github.finance.mall.collector.logevent.MallRegisterEvent;
-import org.github.finance.mall.collector.utils.HttpUtils;
+import org.github.finance.mall.collector.utils.BoltsUtil;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import backtype.storm.topology.BasicOutputCollector;
@@ -29,21 +28,13 @@ public class AssembleUserInfoBolt extends BaseBasicBolt {
         String collectEvent = input.getString(0);
         MallRegisterEvent mallRegisterEvent = (MallRegisterEvent) input.getValue(1);
         log.info("--->deal event {},start to assemble user info:{}", collectEvent, mallRegisterEvent);
-        String getZoneResult = this.getPsition(mallRegisterEvent.getUserPhone());
-        String responseJson = getZoneResult.split("=")[1].trim();
-        JSONObject jsonObject = (JSONObject) JSON.parse(responseJson);
+        JSONObject jsonObject = BoltsUtil.getPsition(mallRegisterEvent.getUserPhone());
         mallRegisterEvent.setCarrier(jsonObject.getString("carrier"));
         mallRegisterEvent.setCatName(jsonObject.getString("catName"));
         mallRegisterEvent.setProvince(jsonObject.getString("province"));
         log.info("--->start to emit mallRegisterEvent:{}", mallRegisterEvent);
         //emit event
         collector.emit(new Values(mallRegisterEvent.getProvince(), mallRegisterEvent.getCatName(), mallRegisterEvent));
-    }
-
-    private String getPsition(String mobile) {
-        String url = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=%s";
-        url = String.format(url, mobile);
-        return HttpUtils.getWithNoException(url, 10 * 1000);
     }
 
     @Override

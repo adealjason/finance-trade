@@ -39,7 +39,7 @@ public class CountCatNameUsersBolt extends BaseBasicBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("catNameUsers", "cnt"));
+        declarer.declare(new Fields("fullCatNameKey", "cnt"));
     }
 
 }

@@ -26,4 +26,7 @@ public class CreateOrderEvent extends BaseLogEvent {
     private int               orderProductSize;
 
     private Date              applyPurchaseDate;
+
+    //手机地点:山东
+    private String            province;
 }
