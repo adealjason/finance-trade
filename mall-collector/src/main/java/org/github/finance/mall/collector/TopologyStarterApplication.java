@@ -69,8 +69,8 @@ public class TopologyStarterApplication {
 
     private static Config getConfig() {
         Config conf = new Config();
-        //3个worker进程
-        //Config.setNumWorkers(conf, 3);
+        //2个worker进程
+        Config.setNumWorkers(conf, 2);
         conf.setDebug(true);
         conf.put("kafka.consumer.timeout", "10000");
         conf.put("kafka.topics", "flume-20170101");
