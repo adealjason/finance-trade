@@ -37,7 +37,7 @@ public class TopologyStarterApplication {
     }
 
     private static void buildCreateOrderTopology(TopologyBuilder builder) {
-        builder.setBolt(TopologyDefinition.assembleCreateOrderinfoBolt, new AssembleCreateOrderinfoBolt(), 2)
+        builder.setBolt(TopologyDefinition.assembleCreateOrderinfoBolt, new AssembleCreateOrderinfoBolt(), 3)
                 .shuffleGrouping(TopologyDefinition.kafkaSpoutName, CollectEvent.CREATE_ORDER.getStreamId());
 
         builder.setBolt(TopologyDefinition.countProvinceOrderAmountBolt, new CountProvinceOrderAmountBolt(), 2)
@@ -57,12 +57,12 @@ public class TopologyStarterApplication {
 
         builder.setBolt(TopologyDefinition.countProvinceUsersBolt, new CountProvinceUsersBolt(), 2)
                 .fieldsGrouping(TopologyDefinition.assembleUserinfoBolt, new Fields("province"));
-        builder.setBolt(TopologyDefinition.cacheProvinceUsersBolt, new CacheProvinceUsersBolt())
+        builder.setBolt(TopologyDefinition.cacheProvinceUsersBolt, new CacheProvinceUsersBolt(), 2)
                 .fieldsGrouping(TopologyDefinition.countProvinceUsersBolt, new Fields("provinceUsersCntKey"));
 
         builder.setBolt(TopologyDefinition.countCatNameUsersBolt, new CountCatNameUsersBolt(), 2)
                 .fieldsGrouping(TopologyDefinition.assembleUserinfoBolt, new Fields("catName"));
-        builder.setBolt(TopologyDefinition.cacheCatNameUsersBolt, new CacheCatNameUsersBolt())
+        builder.setBolt(TopologyDefinition.cacheCatNameUsersBolt, new CacheCatNameUsersBolt(), 2)
                 .fieldsGrouping(TopologyDefinition.countCatNameUsersBolt, new Fields("fullCatNameKey"));
         ;
     }
