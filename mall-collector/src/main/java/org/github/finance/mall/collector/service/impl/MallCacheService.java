@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MallCacheService implements IMallCacheService {
 
+    private static final long   serialVersionUID = 3623467026688069882L;
+
     private final IMallCacheDAO mallCacheDAO;
 
     public MallCacheService() {

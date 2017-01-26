@@ -1,6 +1,7 @@
 package org.github.finance.mall.collector.dao;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -19,7 +20,8 @@ import lombok.ToString;
  * @author ligaofeng 2017年1月26日 下午6:33:04
  */
 @ToString
-public class PersistenceManager {
+public class PersistenceManager implements Serializable {
+    private static final long               serialVersionUID   = 1834014104625989597L;
 
     private DataSource                      dataSource;
     @Getter

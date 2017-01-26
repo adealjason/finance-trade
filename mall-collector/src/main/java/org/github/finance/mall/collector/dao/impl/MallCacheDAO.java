@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
  */
 public class MallCacheDAO implements IMallCacheDAO {
 
+    private static final long serialVersionUID = -1220117489209479267L;
+
     @Override
     public void insert(final MallCacheEntity mallCacheEntity) {
         PersistenceManager.getInstance().getJdbcTemplate().update(insert_mall_cache, new PreparedStatementSetter() {
