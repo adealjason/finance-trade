@@ -50,6 +50,7 @@ public class CreateOrder implements Runnable {
         Map<String, String> dataMap = UserInfoGenerator.getData();
         CreateOrderRequest createOrderRequest = new CreateOrderRequest();
         createOrderRequest.setAddress(dataMap.get("address"));
+        createOrderRequest.setUserPhone(dataMap.get("tel"));
         createOrderRequest.setAddressee(dataMap.get("name"));
         createOrderRequest.setAddresseePhone(dataMap.get("tel"));
         createOrderRequest.setApplyPurchaseDate(DateTime.now().toDate());

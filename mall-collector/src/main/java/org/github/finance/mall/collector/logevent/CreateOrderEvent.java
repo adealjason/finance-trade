@@ -17,6 +17,8 @@ public class CreateOrderEvent extends BaseLogEvent {
 
     private String            userId;
 
+    private String            userPhone;
+
     private String            orderId;
 
     private BigDecimal        orderAmount;

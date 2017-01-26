@@ -22,10 +22,11 @@ public class CreateOrderEventConvert extends BasicLogEventConvertSemantics {
         CreateOrderEvent createOrderEvent = (CreateOrderEvent) baseLogEvent;
         String[] otherDatas = otherData.split(",");
         createOrderEvent.setUserId(otherDatas[0]);
-        createOrderEvent.setOrderId(otherDatas[1]);
-        createOrderEvent.setOrderAmount(new BigDecimal(otherDatas[2]));
-        createOrderEvent.setOrderProductSize(Integer.valueOf(otherDatas[3]));
-        Long time = Long.valueOf(otherDatas[4]);
+        createOrderEvent.setUserPhone(otherDatas[1]);
+        createOrderEvent.setOrderId(otherDatas[2]);
+        createOrderEvent.setOrderAmount(new BigDecimal(otherDatas[3]));
+        createOrderEvent.setOrderProductSize(Integer.valueOf(otherDatas[4]));
+        Long time = Long.valueOf(otherDatas[5]);
         createOrderEvent.setApplyPurchaseDate(new Date(time));
     }
 

@@ -18,6 +18,8 @@ public class CreateOrderRequest implements Serializable {
 
     private String                userId;
 
+    private String                userPhone;
+
     private String                addressee;
 
     private String                address;

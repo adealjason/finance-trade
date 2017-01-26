@@ -80,6 +80,7 @@ public class OrderService implements IOrderService {
                 public List<String> getMetaData() {
                     List<String> dataList = Lists.newArrayListWithCapacity(5);
                     dataList.add(createOrderDTO.getUserId());
+                    dataList.add(createOrderDTO.getUserPhone());
                     dataList.add(orderId);
                     dataList.add(local.get().format(orderDomain.getOrderAmout()));
                     dataList.add(String.valueOf(orderDomain.getOrderProductSize()));
